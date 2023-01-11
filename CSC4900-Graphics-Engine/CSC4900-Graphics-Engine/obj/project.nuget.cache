@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "0puQQUNtBU+fwaW8nM57wBXQ7GNkQVpUkdQJ35IXd6qK0iEqksKUduJ/OAWDgBr+fNVNWxajx9GM2e7IQjzN3A==",
+  "success": true,
+  "projectFilePath": "C:\\Development\\CSC4900-Graphics-Engine\\CSC4900-Graphics-Engine\\CSC4900-Graphics-Engine\\CSC4900-Graphics-Engine.vcxproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\noahg\\.nuget\\packages\\microsoft.windows.sdk.net.ref\\10.0.19041.27\\microsoft.windows.sdk.net.ref.10.0.19041.27.nupkg.sha512"
+  ],
+  "logs": []
+}

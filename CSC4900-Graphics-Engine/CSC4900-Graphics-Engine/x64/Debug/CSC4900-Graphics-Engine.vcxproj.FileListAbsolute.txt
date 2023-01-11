@@ -1,0 +1,5 @@
+C:\Development\CSC4900-Graphics-Engine\CSC4900-Graphics-Engine\x64\Debug\Ijwhost.dll
+C:\Development\CSC4900-Graphics-Engine\CSC4900-Graphics-Engine\x64\Debug\CSC4900-Graphics-Engine.deps.json
+C:\Development\CSC4900-Graphics-Engine\CSC4900-Graphics-Engine\x64\Debug\CSC4900-Graphics-Engine.runtimeconfig.json
+C:\Development\CSC4900-Graphics-Engine\CSC4900-Graphics-Engine\CSC4900-Graphics-Engine\x64\Debug\CSC4900-Graphics-Engine.vcxproj.AssemblyReference.cache
+C:\Development\CSC4900-Graphics-Engine\CSC4900-Graphics-Engine\CSC4900-Graphics-Engine\x64\Debug\CSC4900-Graphics-Engine.genruntimeconfig.cache
