@@ -1,0 +1,6 @@
+﻿  Building Custom Rule C:/Development/CSC4900-Graphics-Engine/resources/glfw-3.3.8/tests/CMakeLists.txt
+  msaa.c
+  getopt.c
+  glad_gl.c
+  Generating Code...
+  msaa.vcxproj -> C:\Development\CSC4900-Graphics-Engine\resources\glfw-3.3.8\build\tests\Debug\msaa.exe
