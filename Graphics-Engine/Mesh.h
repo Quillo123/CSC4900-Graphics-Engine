@@ -26,14 +26,14 @@ namespace Graphics_Engine {
 		int GetUvs0Length();
 
 	private:
-		int verticesLength;
-		vec3* vertices;
+		int _verticesLength;
+		vec3* _vertices;
 
-		int trianglesLength;
-		int* triangles;
+		int _trianglesLength;
+		int* _triangles;
 
-		int uvs0Length;
-		vec2* uvs0;
+		int _uvs0Length;
+		vec2* _uvs0;
 	};
 }
 

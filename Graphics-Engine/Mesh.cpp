@@ -6,8 +6,8 @@ Graphics_Engine::Mesh::Mesh(int verticesLength, vec3* vertices, int trianglesLen
 	this->SetVertices(verticesLength, vertices);
 	this->SetTriangles(trianglesLength, triangles);
 
-	uvs0Length = 0;
-	uvs0 = nullptr;
+	_uvs0Length = 0;
+	_uvs0 = nullptr;
 }
 
 void Graphics_Engine::Mesh::SetVertices(int length, vec3* verts)
@@ -17,25 +17,25 @@ void Graphics_Engine::Mesh::SetVertices(int length, vec3* verts)
 		return;
 	}
 
-	verticesLength = length;
-	vertices = new vec3[length];
+	_verticesLength = length;
+	_vertices = new vec3[length];
 	for (int i = 0; i < length; i++) {
-		vertices[i] = verts[i];
+		_vertices[i] = verts[i];
 	}
 }
 
 vec3 Graphics_Engine::Mesh::GetVertex(int index) 
 {
-	if (index >= verticesLength || index < 0) {
+	if (index >= _verticesLength || index < 0) {
 		std::cerr << "index out of range" << std::endl;
 		return vec3(0, 0, 0);
 	}
-	return vertices[index];
+	return _vertices[index];
 }
 
 int Graphics_Engine::Mesh::GetVerticesLength()
 {
-	return verticesLength;
+	return _verticesLength;
 }
 
 void Graphics_Engine::Mesh::SetTriangles(int length, int* triangles)
@@ -45,25 +45,25 @@ void Graphics_Engine::Mesh::SetTriangles(int length, int* triangles)
 		return;
 	}
 
-	trianglesLength = length;
-	this->triangles = new int[length];
+	_trianglesLength = length;
+	this->_triangles = new int[length];
 	for (int i = 0; i < length; i++) {
-		this->triangles[i] = triangles[i];
+		this->_triangles[i] = triangles[i];
 	}
 }
 
 int Graphics_Engine::Mesh::GetTrianglesIndex(int index)
 {
-	if (index < 0 || index >= trianglesLength) {
+	if (index < 0 || index >= _trianglesLength) {
 		std::cerr << "index out of range" << std::endl;
 		return -1;
 	}
-	return triangles[index];
+	return _triangles[index];
 }
 
 int Graphics_Engine::Mesh::GetTrianglesLength()
 {
-	return trianglesLength;
+	return _trianglesLength;
 }
 
 void Graphics_Engine::Mesh::SetUvs0(int length, vec2* uvs)
@@ -73,23 +73,23 @@ void Graphics_Engine::Mesh::SetUvs0(int length, vec2* uvs)
 		return;
 	}
 
-	uvs0Length = length;
-	uvs0 = new vec2[length];
+	_uvs0Length = length;
+	_uvs0 = new vec2[length];
 	for (int i = 0; i < length; i++) {
-		uvs0[i] = uvs[i];
+		_uvs0[i] = uvs[i];
 	}
 }
 
 vec2 Graphics_Engine::Mesh::GetUvs0Idex(int index)
 {
-	if (index < 0 || index >= uvs0Length) {
+	if (index < 0 || index >= _uvs0Length) {
 		std::cerr << "index out of range" << std::endl;
 		return vec2(0,0);
 	}
-	return uvs0[index];
+	return _uvs0[index];
 }
 
 int Graphics_Engine::Mesh::GetUvs0Length()
 {
-	return uvs0Length;
+	return _uvs0Length;
 }
