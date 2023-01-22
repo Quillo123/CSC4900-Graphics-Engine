@@ -5,6 +5,9 @@
 
 namespace Graphics_Engine {
 
+	/// <summary>
+	/// Base class or creating a scene object
+	/// </summary>
 	class Object
 	{
 	public:
@@ -13,9 +16,15 @@ namespace Graphics_Engine {
 		Transform transform;
 
 		/// <summary>
-		/// Defines how this object is rendered. Called every frame
+		/// Called when the object is first loaded
 		/// </summary>
-		virtual void Render() = 0;
+		virtual void Start() = 0; 
+
+		/// <summary>
+		/// Called every frame;
+		/// Use this for rendering
+		/// </summary>
+		virtual void Update() = 0;
 		
 
 	};
