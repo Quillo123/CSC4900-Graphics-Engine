@@ -2,6 +2,9 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <iostream>
+#include <cassert>
+
+using namespace Graphics_Engine;
 
 Window* Window::CreateWindow()
 {
@@ -30,5 +33,54 @@ Window* Window::CreateWindow()
 
     glViewport(0, 0, 800, 600);
 
+    //Setting the window user pointer allows us to acces it from the GLFW object
+    //using glfwGetWindowUserPointer(window)
+    glfwSetWindowUserPointer(win->window, &win);
+
+    //Wraps the framebuffer_size_callback
+    auto window_size_callback = [](GLFWwindow* window, int w, int h) {
+        Window* obj = static_cast<Window*>(glfwGetWindowUserPointer(window));
+        assert(obj);
+        obj->framebuffer_size_callback(window, w, h);
+    };
+
+
+
     return win;
 }
+
+int Graphics_Engine::Window::StartApplication()
+{
+    while (!glfwWindowShouldClose(window))
+    {
+        OnWindowInput();
+
+        glfwSwapBuffers(window);
+        glfwPollEvents();
+
+        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT);
+    }
+
+    glfwTerminate();
+
+    return 0;
+}
+
+Graphics_Engine::Window::~Window()
+{
+    
+}
+
+void Graphics_Engine::Window::framebuffer_size_callback(GLFWwindow* window, int width, int height)
+{
+    glViewport(0, 0, width, height);
+}
+
+void Graphics_Engine::Window::OnWindowInput()
+{
+    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+        glfwSetWindowShouldClose(window, true);
+}
+
+

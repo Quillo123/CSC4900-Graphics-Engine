@@ -3,18 +3,37 @@
 #include <iostream>
 
 #pragma once
+namespace Graphics_Engine {
 
-class Window
-{
-public:
+	class Window
+	{
 
-	//fields
+	public:
 
-	//The OpenGL Window Context
-	GLFWwindow* window;
+		//fields
+ 
+		//The OpenGL Window Context
+		GLFWwindow* window;
 
-	//functions
-	static Window* CreateWindow();
+		//functions
 
-};
+		//Creates and initializes a new window
+		static Window* CreateWindow();
+
+		//Starts the application loop
+		int StartApplication();
+
+		~Window();
+
+	private:
+
+		//Called whenever the window is resized	
+		void framebuffer_size_callback(GLFWwindow* window, int width, int height);
+		void OnWindowInput();
+	};
+
+
+
+}
+
 
