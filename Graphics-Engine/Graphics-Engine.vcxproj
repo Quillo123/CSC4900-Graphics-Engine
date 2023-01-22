@@ -134,12 +134,14 @@
   <ItemGroup>
     <ClCompile Include="glad.c" />
     <ClCompile Include="Mesh.cpp" />
+    <ClCompile Include="MeshRenderer.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Mesh.h" />
+    <ClInclude Include="MeshRenderer.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="Window.h" />
