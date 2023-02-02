@@ -16,7 +16,7 @@ Window* Window::CreateWindow()
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     //glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 
-    win->window = glfwCreateWindow(800, 600, "LearnOpenGL", NULL, NULL);
+    win->window = glfwCreateWindow(1920, 1080, "LearnOpenGL", NULL, NULL);
     if (win->window == NULL)
     {
         std::cout << "Failed to create GLFW window" << std::endl;
@@ -31,7 +31,7 @@ Window* Window::CreateWindow()
         return nullptr;
     }
 
-    glViewport(0, 0, 800, 600);
+    glViewport(0, 0, 1920, 1080);
 
     //Setting the window user pointer allows us to acces it from the GLFW object
     //using glfwGetWindowUserPointer(window)
@@ -51,15 +51,18 @@ Window* Window::CreateWindow()
 
 int Graphics_Engine::Window::StartApplication()
 {
+    scene.Start();
     while (!glfwWindowShouldClose(window))
     {
         OnWindowInput();
 
-        glfwSwapBuffers(window);
-        glfwPollEvents();
-
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
+
+        scene.Update();
+
+        glfwSwapBuffers(window);
+        glfwPollEvents();
     }
 
     glfwTerminate();

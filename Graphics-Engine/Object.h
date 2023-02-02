@@ -11,7 +11,10 @@ namespace Graphics_Engine {
 	class Object
 	{
 	public:
-		
+		/// <summary>
+		/// DO NOT MODIFY
+		/// </summary>
+		int ID;
 		std::string name;
 		Transform transform;
 
@@ -22,11 +25,13 @@ namespace Graphics_Engine {
 
 		/// <summary>
 		/// Called every frame;
-		/// Use this for rendering
 		/// </summary>
 		virtual void Update() = 0;
 		
-
+		/// <summary>
+		/// Returns a deep copy of the object
+		/// </summary>
+		virtual Object* Copy() = 0;
 	};
 }
 

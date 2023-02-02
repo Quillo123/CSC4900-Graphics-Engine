@@ -1,6 +1,7 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <iostream>
+#include "Scene.h"
 
 #pragma once
 namespace Graphics_Engine {
@@ -11,6 +12,7 @@ namespace Graphics_Engine {
 	public:
 
 		//fields
+		Scene scene = Scene();
  
 		//The OpenGL Window Context
 		GLFWwindow* window;
