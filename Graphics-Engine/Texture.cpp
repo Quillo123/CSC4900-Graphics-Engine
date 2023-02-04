@@ -6,7 +6,6 @@
 
 Texture::Texture()
 {
-	glGenTextures(1, &_textureId);
     _data = nullptr;
     _width = 0;
     _height = 0;
@@ -15,6 +14,7 @@ Texture::Texture()
 
 void Texture::LoadTexture(std::string filepath)
 {
+    glGenTextures(1, &_textureId);
     glBindTexture(GL_TEXTURE_2D, _textureId);
     // set the texture wrapping/filtering options (on the currently bound texture object)
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);

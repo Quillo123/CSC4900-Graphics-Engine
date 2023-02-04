@@ -23,10 +23,10 @@ int tri[] = {
 
 int su = 4;
 vec2 uvs[] = {
-    vec2(1,1),
-    vec2(0,1),
-    vec2(0,0),
-    vec2(1,0)
+    vec2(1.0f,1.0f),
+    vec2(1.0f,0.0f),
+    vec2(0.0f,0.0f),
+    vec2(0.0f,1.0f)
 };
 
 int main()
@@ -35,12 +35,12 @@ int main()
 
     Shader* SampleTriangleShader = Shader::CreateShader("HelloTriangle_VS.glsl", "HelloTriangle_FS.glsl");
     
-    vec4 color = vec4(1, 1, 0, 1);
+    vec4 color = vec4(1, 1, 1, 1);
     SampleTriangleShader->Use();
     SampleTriangleShader->SetVec4("ourColor", color);
 
     Texture texture;
-    texture.LoadTexture("02_grass.png");
+    texture.LoadTexture("004_stone.png");
     
     MeshMaterial* mat = new MeshMaterial(SampleTriangleShader, texture);
 

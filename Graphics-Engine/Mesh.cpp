@@ -58,7 +58,6 @@ int Graphics_Engine::Mesh::GetVerticesLength()
 
 void Graphics_Engine::Mesh::SetTriangles(int length, int* triangles)
 {
-	Use();
 	if (length <= 0 || triangles == nullptr) {
 		std::cerr << "Cannot input empty array; Use mesh.Clear() instead;" << std::endl;
 		return;
@@ -70,6 +69,7 @@ void Graphics_Engine::Mesh::SetTriangles(int length, int* triangles)
 		this->_triangles[i] = triangles[i];
 	}
 
+	Use();
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, _trianglesLength * sizeof(int), _triangles, _drawMode);
 	UnUse();
 }
@@ -172,20 +172,22 @@ void Graphics_Engine::Mesh::ReloadVertices()
 {
 	float* vertices = new float[_verticesLength * 5];
 
-	for (int i = 0; i < _verticesLength; i++) {
+	int j = 0;
+	for (int i = 0; i < _verticesLength * 5; i+=5) {
 		
-		vertices[i] = _vertices[i].x;
-		vertices[i + 1] = _vertices[i].y;
-		vertices[i+2] = _vertices[i].z;
+		vertices[i] = _vertices[j].x;
+		vertices[i + 1] = _vertices[j].y;
+		vertices[i+2] = _vertices[j].z;
 
 		if (_uvs0 == nullptr) {
 			vertices[i + 3] = 0;
 			vertices[i + 4] = 0;
 		}
 		else {
-			vertices[i+3] = _uvs0[i].x;
-			vertices[i+4] = _uvs0[i].y;
+			vertices[i+3] = _uvs0[j].x;
+			vertices[i+4] = _uvs0[j].y;
 		}
+		j++;
 	}
 
 	Use();
