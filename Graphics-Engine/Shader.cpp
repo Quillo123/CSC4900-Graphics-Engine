@@ -1,6 +1,7 @@
 #include "Shader.h"
 #include <fstream>
 #include <glad/glad.h>
+#include <glm/gtc/type_ptr.hpp>
 
 using namespace Graphics_Engine;
 
@@ -85,10 +86,40 @@ Shader* Shader::CreateShader(std::string vertexShaderFilePath, std::string fragm
 
 void Graphics_Engine::Shader::Use()
 {
-	glUseProgram(_shaderProgram);
+	glUseProgram(_shaderProgramID);
+}
+
+void Graphics_Engine::Shader::SetBool(const std::string& name, bool value)
+{
+	glUniform1i(glGetUniformLocation(_shaderProgramID, name.c_str()), (int)value);
+}
+
+void Graphics_Engine::Shader::SetInt(const std::string& name, int value)
+{
+	glUniform1i(glGetUniformLocation(_shaderProgramID, name.c_str()), value);
+}
+
+void Graphics_Engine::Shader::SetFloat(const std::string& name, float value)
+{
+	glUniform1f(glGetUniformLocation(_shaderProgramID, name.c_str()), value);
+}
+
+void Graphics_Engine::Shader::SetVec3(const std::string& name, glm::vec3 value)
+{
+	glUniform3fv(glGetUniformLocation(_shaderProgramID, name.c_str()), 1, glm::value_ptr(value));
+}
+
+void Graphics_Engine::Shader::SetVec4(const std::string& name, glm::vec4 value)
+{
+	glUniform4fv(glGetUniformLocation(_shaderProgramID, name.c_str()), 1, glm::value_ptr(value));
+}
+
+void Graphics_Engine::Shader::SetMat4(const std::string& name, glm::mat4 value)
+{
+	glUniformMatrix4fv(glGetUniformLocation(_shaderProgramID, name.c_str()), 1, GL_FALSE, glm::value_ptr(value));
 }
 
 Graphics_Engine::Shader::Shader(unsigned int shaderProgram)
 {
-	_shaderProgram = shaderProgram;
+	_shaderProgramID = shaderProgram;
 }

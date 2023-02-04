@@ -6,21 +6,21 @@ using namespace Graphics_Engine;
 
 
 
-Graphics_Engine::MeshRenderer::MeshRenderer(Shader* shader)
+Graphics_Engine::MeshRenderer::MeshRenderer(Material* shader)
 {
-	_shader = shader;
+	_material = shader;
 	_mesh = nullptr;
 }
 
-Graphics_Engine::MeshRenderer::MeshRenderer(Shader* shader, Mesh* mesh)
+Graphics_Engine::MeshRenderer::MeshRenderer(Material* shader, Mesh* mesh)
 {
-	_shader = shader;
+	_material = shader;
 	_mesh = mesh;
 }
 
-Graphics_Engine::MeshRenderer::MeshRenderer(Shader* shader, vec3 vertices[], int vertexCount, int triangles[], int triangleCount)
+Graphics_Engine::MeshRenderer::MeshRenderer(Material* shader, vec3 vertices[], int vertexCount, int triangles[], int triangleCount)
 {
-	_shader = shader;
+	_material = shader;
 	_mesh = new Mesh(vertexCount, vertices, triangleCount, triangles);
 }
 
@@ -38,7 +38,7 @@ void Graphics_Engine::MeshRenderer::Start()
 
 void Graphics_Engine::MeshRenderer::Update()
 {
-	_shader->Use();
+	_material->Use();
 	_mesh->Use();
 	glDrawElements(GL_TRIANGLES, _mesh->GetTrianglesLength(), GL_UNSIGNED_INT, 0);
 	_mesh->UnUse();
@@ -46,7 +46,7 @@ void Graphics_Engine::MeshRenderer::Update()
 
 Object* Graphics_Engine::MeshRenderer::Copy()
 {
-	MeshRenderer* mr = new MeshRenderer(_shader, _mesh);
+	MeshRenderer* mr = new MeshRenderer(_material, _mesh);
 	mr->name = name;
 	mr->transform.SetPosition(transform.GetPosition());
 	mr->transform.SetRotation(transform.GetRotation());

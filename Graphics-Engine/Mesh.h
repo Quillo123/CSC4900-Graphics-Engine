@@ -29,8 +29,7 @@ namespace Graphics_Engine {
 		int GetTrianglesLength();
 
 		void SetUvs0(int length, vec2* uvs);
-		vec2 GetUvs0Idex(int index);
-		int GetUvs0Length();
+		vec2 GetUvs0Index(int index);
 
 		void SetVertextBufferMode(GLenum drawMode);
 
@@ -43,13 +42,12 @@ namespace Graphics_Engine {
 
 	private:
 		int _verticesLength;
-		float* _vertices;
+		vec3* _vertices;
+		vec2* _uvs0;
 
 		int _trianglesLength;
 		int* _triangles;
 
-		int _uvs0Length;
-		vec2* _uvs0;
 
 		GLenum _drawMode = GL_STATIC_DRAW;
 	
@@ -58,6 +56,8 @@ namespace Graphics_Engine {
 		unsigned int _vertexArrayId;
 
 		int _inUse;
+
+		void ReloadVertices();
 	};
 }
 

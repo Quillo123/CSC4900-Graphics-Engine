@@ -10,10 +10,7 @@ Graphics_Engine::Mesh::Mesh(int verticesLength, vec3 vertices[], int trianglesLe
 	
 	this->SetVertices(verticesLength, vertices);
 	this->SetTriangles(trianglesLength, triangles);
-
-	_uvs0Length = 0;
 	_uvs0 = nullptr;
-
 }
 
 Graphics_Engine::Mesh::~Mesh()
@@ -30,24 +27,18 @@ Graphics_Engine::Mesh::~Mesh()
 
 void Graphics_Engine::Mesh::SetVertices(int length, vec3 verts[])
 {
-	Use();
 	if (length < 0 || verts == nullptr) {
 		std::cerr << "Cannot input empty array; Use mesh.Clear() instead;" << std::endl;
 		return;
 	}
 
 	_verticesLength = length;
-	_vertices = new float[length * 3];
-	int j = 0;
+	_vertices = new vec3[length];
 	for (int i = 0; i < length; i++) {
-		_vertices[j] = verts[i].x;
-		_vertices[j + 1] = verts[i].y;
-		_vertices[j + 2] = verts[i].z;
-		j += 3;
+		_vertices[i] = verts[i];
 	}
 
-	glBufferData(GL_ARRAY_BUFFER, _verticesLength * sizeof(float) * 3, _vertices, _drawMode);
-	UnUse();
+	ReloadVertices();
 }
 
 vec3 Graphics_Engine::Mesh::GetVertex(int index) 
@@ -56,8 +47,7 @@ vec3 Graphics_Engine::Mesh::GetVertex(int index)
 		std::cerr << "index out of range" << std::endl;
 		return vec3(0, 0, 0);
 	}
-	int i = index * 3;
-	vec3 v = vec3(_vertices[i], _vertices[i + 1], _vertices[i + 2]);
+	vec3 v = _vertices[index];
 	return v;
 }
 
@@ -100,33 +90,32 @@ int Graphics_Engine::Mesh::GetTrianglesLength()
 
 void Graphics_Engine::Mesh::SetUvs0(int length, vec2* uvs)
 {
-	Use();
-	if (length < 0 || uvs == nullptr) {
+	if (length <= 0 || uvs == nullptr) {
 		std::cerr << "Cannot input empty array; Use mesh.Clear() instead;" << std::endl;
 		return;
 	}
 
-	_uvs0Length = length;
+	if (length != _verticesLength) {
+		std::cerr << "uvs length and vertices length must match" << std::endl;
+		return;
+	}
+
 	_uvs0 = new vec2[length];
 	for (int i = 0; i < length; i++) {
 		_uvs0[i] = uvs[i];
 	}
-	UnUse();
+	ReloadVertices();
 }
 
-vec2 Graphics_Engine::Mesh::GetUvs0Idex(int index)
+vec2 Graphics_Engine::Mesh::GetUvs0Index(int index)
 {
-	if (index < 0 || index >= _uvs0Length) {
+	if (index < 0 || index >= _verticesLength) {
 		std::cerr << "index out of range" << std::endl;
 		return vec2(0,0);
 	}
 	return _uvs0[index];
 }
 
-int Graphics_Engine::Mesh::GetUvs0Length()
-{
-	return _uvs0Length;
-}
 
 void Graphics_Engine::Mesh::SetVertextBufferMode(GLenum drawMode)
 {
@@ -162,8 +151,14 @@ void Graphics_Engine::Mesh::Use()
 	glBindVertexArray(_vertexArrayId);
 	glBindBuffer(GL_ARRAY_BUFFER, _vertexBufferId);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _trianglesBufferId);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+
+	// Position Attribute
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (GLvoid*)0);
 	glEnableVertexAttribArray(0);
+
+	// UV0 Attribute
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
+	glEnableVertexAttribArray(1);
 }
 
 void Graphics_Engine::Mesh::UnUse()
@@ -171,5 +166,31 @@ void Graphics_Engine::Mesh::UnUse()
 	glBindVertexArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+}
+
+void Graphics_Engine::Mesh::ReloadVertices()
+{
+	float* vertices = new float[_verticesLength * 5];
+
+	for (int i = 0; i < _verticesLength; i++) {
+		
+		vertices[i] = _vertices[i].x;
+		vertices[i + 1] = _vertices[i].y;
+		vertices[i+2] = _vertices[i].z;
+
+		if (_uvs0 == nullptr) {
+			vertices[i + 3] = 0;
+			vertices[i + 4] = 0;
+		}
+		else {
+			vertices[i+3] = _uvs0[i].x;
+			vertices[i+4] = _uvs0[i].y;
+		}
+	}
+
+	Use();
+	glBufferData(GL_ARRAY_BUFFER, _verticesLength * sizeof(float) * 5, vertices, _drawMode);
+	UnUse();
+
 }
 

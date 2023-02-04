@@ -1,7 +1,7 @@
 #include "Object.h"
 #include "Mesh.h"
-#include "Shader.h"
 #include <glm/glm.hpp>
+#include "Material.h"
 
 #pragma once
 
@@ -12,11 +12,11 @@ namespace Graphics_Engine {
 	public:
 
 
-		MeshRenderer(Shader* shader);
+		MeshRenderer(Material* shader);
 
-		MeshRenderer(Shader* shader, Mesh* mesh);
+		MeshRenderer(Material* shader, Mesh* mesh);
 
-		MeshRenderer(Shader* shader, vec3 vertices[], int vertexCount, int triangles[], int triangleCount);
+		MeshRenderer(Material* shader, vec3 vertices[], int vertexCount, int triangles[], int triangleCount);
 
 		~MeshRenderer();
 
@@ -28,7 +28,7 @@ namespace Graphics_Engine {
 		
 	private:
 		Mesh* _mesh;
-		Shader* _shader;
+		Material* _material;
 
 	};
 

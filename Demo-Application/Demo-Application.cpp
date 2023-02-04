@@ -2,16 +2,17 @@
 #include "Window.h"
 #include "MeshRenderer.h"
 #include "Shader.h"
+#include "MeshMaterial.h"
 
 using namespace Graphics_Engine;
 using namespace std;
 
 int sv = 4;
 vec3 vertices[] = {
-     vec3(0.9f,  0.9f, 0),  // top right
-     vec3(0.9f, -0.9f, 0.0f),  // bottom right
-    vec3(-0.9f, -0.9f, 0.0f),  // bottom left
-    vec3(-0.9f,  0.9f, 0.0f)   // top left 
+     vec3(0.5f, 0.5f, 0),  // top right
+     vec3(0.5f, -0.5f, 0.0f),  // bottom right
+     vec3(-0.5f, -0.5f, 0.0f),  // bottom left
+     vec3(-0.5f,  0.5f, 0.0f)   // top left 
 };
 
 int st = 6;
@@ -20,13 +21,33 @@ int tri[] = {
     1, 2, 3
 };
 
+int su = 4;
+vec2 uvs[] = {
+    vec2(1,1),
+    vec2(0,1),
+    vec2(0,0),
+    vec2(1,0)
+};
+
 int main()
 {
     Window* win = Window::CreateWindow();
 
     Shader* SampleTriangleShader = Shader::CreateShader("HelloTriangle_VS.glsl", "HelloTriangle_FS.glsl");
+    
+    vec4 color = vec4(1, 1, 0, 1);
+    SampleTriangleShader->Use();
+    SampleTriangleShader->SetVec4("ourColor", color);
+
+    Texture texture;
+    texture.LoadTexture("02_grass.png");
+    
+    MeshMaterial* mat = new MeshMaterial(SampleTriangleShader, texture);
+
     Mesh* mesh = new Mesh(sv, vertices, st, tri);
-    MeshRenderer* mr = new MeshRenderer(SampleTriangleShader, mesh);
+    mesh->SetUvs0(4, uvs);
+
+    MeshRenderer* mr = new MeshRenderer(mat, mesh);
     mr->name = "HelloTriangle";
 
     win->scene.Instantiate(dynamic_cast<Object*>(mr));

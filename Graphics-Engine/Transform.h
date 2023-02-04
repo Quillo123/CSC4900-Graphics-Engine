@@ -25,7 +25,9 @@ namespace Graphics_Engine {
 		vec3 _rotation = vec3(0,0,0);
 		vec3 _scale = vec3(1, 1, 1);
 
+		mat4 _model = mat4(1.0f);
 
+		void UpdateModel();
 	};
 
 }
