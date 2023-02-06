@@ -50,7 +50,15 @@ int main()
     MeshRenderer* mr = new MeshRenderer(mat, mesh);
     mr->name = "HelloTriangle";
 
-    win->scene.Instantiate(dynamic_cast<Object*>(mr));
+    auto cam = win->scene.Instantiate(dynamic_cast<SceneObject*>(new Camera()));
+    win->scene.mainCam = dynamic_cast<Camera*>(cam);
+    win->scene.mainCam->transform.SetPosition(vec3(0, 0, -4));
+    cout << win->scene.mainCam->transform.ToString();
+
+    mr->transform.SetRotation(vec3(0.3f, 0, 0.3f));
+    cout << mr->transform.ToString();
+
+    win->scene.Instantiate(dynamic_cast<SceneObject*>(mr));
 
     win->StartApplication();
 

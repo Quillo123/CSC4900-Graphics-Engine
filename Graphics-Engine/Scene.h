@@ -1,7 +1,6 @@
-#include "Object.h"
+#pragma once 
 #include <map>
-
-#pragma once
+#include "Camera.h"
 
 namespace Graphics_Engine {
 
@@ -9,7 +8,9 @@ namespace Graphics_Engine {
 	{
 	public:
 		int currKey = 0;
-		std::map<int, Object*> objects;
+		std::map<int, SceneObject*> objects;
+
+		Camera* mainCam = nullptr;
 
 		/// <summary>
 		/// Creates a copy of the given object and adds it to the scene
@@ -19,20 +20,19 @@ namespace Graphics_Engine {
 		/// <param name="rotation">The rotation of the object</param>
 		/// <param name="scale">The scale of the object</param>
 		/// <returns>A pointer to the new Object</returns>
-		Object* Instantiate(Object* object, vec3 position, vec3 rotation, vec3 scale);
-		Object* Instantiate(Object* object, vec3 position, vec3 rotation);
-		Object* Instantiate(Object* object, vec3 position);
-		Object* Instantiate(Object* object);
+		SceneObject* Instantiate(SceneObject* object, vec3 position, vec3 rotation, vec3 scale);
+		SceneObject* Instantiate(SceneObject* object, vec3 position, vec3 rotation);
+		SceneObject* Instantiate(SceneObject* object, vec3 position);
+		SceneObject* Instantiate(SceneObject* object);
 
 		void Start();
 
 		void Update();
 
 	private:
-		void AddObject(Object* object, bool override = false);
+		void AddObject(SceneObject* object, bool override = false);
 
 		int GetNewKey();
-
 
 
 	};

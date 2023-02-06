@@ -2,6 +2,12 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+#include <sstream>
+
+Graphics_Engine::Transform::Transform()
+{
+    UpdateModel();
+}
 
 vec3 Graphics_Engine::Transform::GetPosition()
 {
@@ -36,11 +42,30 @@ void Graphics_Engine::Transform::SetScale(vec3 scale)
     UpdateModel();
 }
 
+mat4 Graphics_Engine::Transform::Model()
+{
+    return _model;
+}
+
+std::string Graphics_Engine::Transform::ToString()
+{
+    std::stringstream stream;
+    stream << "Transform:" << std::endl;
+    stream << "\tPostion: " << _position.x << ',' << _position.y << "," << _position.z << std::endl;
+    stream << "\tRotation: " << _rotation.x << ',' << _rotation.y << ',' << _rotation.z << std::endl;
+    stream << "\tScale: " << _scale.x << ',' << _scale.y << ',' << _scale.z << std::endl;
+    return stream.str();
+}
+
 void Graphics_Engine::Transform::UpdateModel()
 {
     _model = mat4(1.0f);
-    _model = glm::translate(_model, _position);
-    _model = glm::rotate(_model, 1.0f, _rotation);
+
+    _model = glm::rotate(_model, _rotation.x, vec3(1, 0, 0));
+    _model = glm::rotate(_model, _rotation.y, vec3(0, 1, 0));
+    _model = glm::rotate(_model, _rotation.z, vec3(0, 0, 1));
+
+    _model = glm::translate(_model, _position);   
     _model = glm::scale(_model, _scale);
 }
 

@@ -1,14 +1,17 @@
+#pragma once
 #include <glm/glm.hpp>
+#include <iostream>
 
 using namespace glm;
 
-#pragma once
 
 namespace Graphics_Engine {
 
 	class Transform
 	{
 	public:
+
+		Transform();
 		
 		vec3 GetPosition();
 		void SetPosition(vec3 position);
@@ -19,6 +22,11 @@ namespace Graphics_Engine {
 
 		vec3 GetScale();
 		void SetScale(vec3 scale);
+
+
+		mat4 Model();
+
+		std::string ToString();
 
 	private:
 		vec3 _position = vec3(0,0,0);

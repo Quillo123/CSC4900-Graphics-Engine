@@ -1,9 +1,9 @@
+#pragma once
 #include <glm/glm.hpp>
 #include <glad/glad.h>
 
 using namespace glm;
 
-#pragma once
 
 namespace Graphics_Engine {
 	/// <summary>

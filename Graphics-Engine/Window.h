@@ -1,15 +1,17 @@
+#pragma once
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <iostream>
 #include "Scene.h"
 
-#pragma once
 namespace Graphics_Engine {
 
 	class Window
 	{
 
 	public:
+
+		static Window* main;
 
 		//fields
 		Scene scene = Scene();
@@ -27,7 +29,10 @@ namespace Graphics_Engine {
 
 		~Window();
 
+		ivec2 Resolution();
+
 	private:
+		ivec2 _resolution;
 
 		//Called whenever the window is resized	
 		void framebuffer_size_callback(GLFWwindow* window, int width, int height);

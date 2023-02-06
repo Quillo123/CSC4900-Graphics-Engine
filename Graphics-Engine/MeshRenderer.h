@@ -1,13 +1,13 @@
-#include "Object.h"
+#pragma once
+#include "SceneObject.h"
 #include "Mesh.h"
 #include <glm/glm.hpp>
 #include "Material.h"
 
-#pragma once
 
 namespace Graphics_Engine {
 
-	class MeshRenderer : public Object
+	class MeshRenderer : public SceneObject
 	{
 	public:
 
@@ -24,7 +24,7 @@ namespace Graphics_Engine {
 
 		void Update() override;
 
-		Object* Copy() override;
+		SceneObject* Copy() override;
 		
 	private:
 		Mesh* _mesh;

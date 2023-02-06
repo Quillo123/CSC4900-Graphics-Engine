@@ -1,11 +1,11 @@
 #include "Scene.h"
-#include "Object.h"
+#include "SceneObject.h"
 #include <map>
 
 
 using namespace Graphics_Engine;
 
-Object* Graphics_Engine::Scene::Instantiate(Object* object, vec3 position, vec3 rotation, vec3 scale)
+SceneObject* Graphics_Engine::Scene::Instantiate(SceneObject* object, vec3 position, vec3 rotation, vec3 scale)
 {
     auto obj = Instantiate(object, position, rotation);
     obj->transform.SetScale(scale);
@@ -13,23 +13,24 @@ Object* Graphics_Engine::Scene::Instantiate(Object* object, vec3 position, vec3 
 }    
 
 
-Object* Graphics_Engine::Scene::Instantiate(Object* object, vec3 position, vec3 rotation)
+SceneObject* Graphics_Engine::Scene::Instantiate(SceneObject* object, vec3 position, vec3 rotation)
 {
     auto obj = Instantiate(object, position);
     obj->transform.SetRotation(rotation);
     return obj;
 }
 
-Object* Graphics_Engine::Scene::Instantiate(Object* object, vec3 position)
+SceneObject* Graphics_Engine::Scene::Instantiate(SceneObject* object, vec3 position)
 {
     auto obj = Instantiate(object);
     obj->transform.SetPosition(position);
     return obj;
 }
 
-Object* Graphics_Engine::Scene::Instantiate(Object* object)
+SceneObject* Graphics_Engine::Scene::Instantiate(SceneObject* object)
 {
-    Object* obj = object->Copy();
+    SceneObject* obj = object->Copy();
+    //obj->scene = this;
     AddObject(obj, false);
     return obj;
 }
@@ -50,19 +51,19 @@ void Graphics_Engine::Scene::Update()
     }
 }
 
-void Graphics_Engine::Scene::AddObject(Object* object, bool override)
+void Graphics_Engine::Scene::AddObject(SceneObject* object, bool override)
 {
     if (override) {
         if (objects.at(object->ID) == nullptr) {
             objects.erase(object->ID);
         }
-        objects.insert(std::pair<int, Object*>{ object->ID, object });
+        objects.insert(std::pair<int, SceneObject*>{ object->ID, object });
     }
     else {
         int key = GetNewKey();
         object->ID = key;
 
-        objects.insert(std::pair<int, Object*>{ key, object });
+        objects.insert(std::pair<int, SceneObject*>{ key, object });
 
     }
 }

@@ -1,9 +1,7 @@
+#pragma once
+
 #include "Material.h"
 #include "Texture.h"
-
-
-
-#pragma once
 
 namespace Graphics_Engine {
 
