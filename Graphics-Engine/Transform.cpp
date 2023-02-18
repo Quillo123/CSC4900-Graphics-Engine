@@ -3,6 +3,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include <sstream>
+#include "Window.h"
 
 Graphics_Engine::Transform::Transform()
 {
@@ -29,6 +30,11 @@ void Graphics_Engine::Transform::SetRotation(vec3 rotation)
 {
     _rotation = rotation;
     UpdateModel();
+}
+
+void Graphics_Engine::Transform::Rotate(float degrees, vec3 axis)
+{
+    _model = glm::rotate(_model, Window::main->GetTime() * glm::radians(degrees), axis);
 }
 
 vec3 Graphics_Engine::Transform::GetScale()

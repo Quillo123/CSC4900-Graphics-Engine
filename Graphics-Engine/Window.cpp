@@ -54,6 +54,8 @@ int Graphics_Engine::Window::StartApplication()
 {
     Window::main = this;
 
+    lastTime = GetTime();
+
     scene.Start();
     while (!glfwWindowShouldClose(window))
     {
@@ -66,6 +68,8 @@ int Graphics_Engine::Window::StartApplication()
 
         glfwSwapBuffers(window);
         glfwPollEvents();
+
+        lastTime = GetTime();
     }
 
     glfwTerminate();
@@ -81,6 +85,25 @@ Graphics_Engine::Window::~Window()
 ivec2 Graphics_Engine::Window::Resolution()
 {
     return _resolution;
+}
+
+/// <summary>
+/// Returns true if a Key is pressed
+/// </summary>
+/// <param name="key">The GLFW KeyCode</param>
+bool Graphics_Engine::Window::GetKeyPressed(int key)
+{
+    return glfwGetKey(window, key);
+}
+
+float Graphics_Engine::Window::GetTime()
+{
+    return glfwGetTime();
+}
+
+float Graphics_Engine::Window::DeltaTime()
+{
+    return glfwGetTime() - lastTime;
 }
 
 void Graphics_Engine::Window::framebuffer_size_callback(GLFWwindow* window, int width, int height)

@@ -142,6 +142,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CameraController.cpp" />
     <ClCompile Include="Demo-Application.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -152,6 +153,10 @@
   <ItemGroup>
     <None Include="HelloTriangle_FS.glsl" />
     <None Include="HelloTriangle_VS.glsl" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CameraController.h" />
+    <ClInclude Include="VoxelData.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

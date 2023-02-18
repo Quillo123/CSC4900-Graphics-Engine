@@ -13,13 +13,18 @@ namespace Graphics_Engine {
 
 		Transform();
 		
+		// Position
 		vec3 GetPosition();
 		void SetPosition(vec3 position);
 
 
+		// Rotation
 		vec3 GetRotation();
 		void SetRotation(vec3 rotation);
 
+		void Rotate(float degrees, vec3 axis);
+
+		//Scale
 		vec3 GetScale();
 		void SetScale(vec3 scale);
 

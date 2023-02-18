@@ -31,6 +31,13 @@ namespace Graphics_Engine {
 
 		ivec2 Resolution();
 
+
+		//Helpers 
+		float lastTime = 0;
+
+		bool GetKeyPressed(int key);
+		float GetTime();
+		float DeltaTime();
 	private:
 		ivec2 _resolution;
 

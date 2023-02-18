@@ -19,6 +19,7 @@ void Graphics_Engine::Camera::Start()
 
 void Graphics_Engine::Camera::Update()
 {
+	
 }
 
 SceneObject* Graphics_Engine::Camera::Copy()
