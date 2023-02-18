@@ -1,6 +1,8 @@
 #pragma once 
 #include <map>
 #include "Camera.h"
+#include <list>
+
 
 namespace Graphics_Engine {
 
@@ -24,6 +26,16 @@ namespace Graphics_Engine {
 		SceneObject* Instantiate(SceneObject* object, vec3 position, vec3 rotation);
 		SceneObject* Instantiate(SceneObject* object, vec3 position);
 		SceneObject* Instantiate(SceneObject* object);
+
+		/// <summary>
+		/// Returns the first object with the given name
+		/// </summary>
+		SceneObject* FindObject(std::string name);
+
+		/// <summary>
+		/// Returns a list of all objects with the given name
+		/// </summary>
+		std::list<SceneObject*> FindObjects(std::string name);
 
 		void Start();
 

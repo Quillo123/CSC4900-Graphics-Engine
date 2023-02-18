@@ -1,6 +1,8 @@
 #include "Scene.h"
 #include "SceneObject.h"
 #include <map>
+#include <list>
+#include <string>
 
 
 using namespace Graphics_Engine;
@@ -29,10 +31,51 @@ SceneObject* Graphics_Engine::Scene::Instantiate(SceneObject* object, vec3 posit
 
 SceneObject* Graphics_Engine::Scene::Instantiate(SceneObject* object)
 {
+
+    SceneObject* test = FindObject(object->name);
+    int nameModifier = 0;
+    while(test != nullptr)
+    {
+        nameModifier++;
+        test = FindObject(test->name + std::to_string(nameModifier));
+    }
+
+    
+
     SceneObject* obj = object->Copy();
+
+    if (nameModifier != 0) {
+        obj->name = object->name + std::to_string(nameModifier);
+    }
+
     //obj->scene = this;
     AddObject(obj, false);
     return obj;
+}
+
+SceneObject* Graphics_Engine::Scene::FindObject(std::string name)
+{
+    for (auto const& [key, val] : objects)
+    {
+        if (val->name == name) {
+            return val;
+        }
+    }
+    return nullptr;
+}
+
+std::list<SceneObject*> Graphics_Engine::Scene::FindObjects(std::string name)
+{
+    std::list<SceneObject*> objs = std::list<SceneObject*>();
+    
+    for (auto const& [key, val] : objects)
+    {
+        if (val->name == name) {
+            objs.push_back(val);
+        }
+    }
+
+    return objs;
 }
 
 void Graphics_Engine::Scene::Start()

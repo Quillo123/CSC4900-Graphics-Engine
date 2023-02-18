@@ -9,44 +9,27 @@
 using namespace Graphics_Engine;
 using namespace std;
 
-//int sv = 4;
-//vec3 vertices[] = {
-//     vec3(0.5f, 0.5f, 0),  // top right
-//     vec3(0.5f, -0.5f, 0.0f),  // bottom right
-//     vec3(-0.5f, -0.5f, 0.0f),  // bottom left
-//     vec3(-0.5f,  0.5f, 0.0f)   // top left 
-//};
-//
-//int st = 6;
-//int tri[] = {
-//    0, 1, 3, 
-//    1, 2, 3
-//};
-//
-//int su = 4;
-//vec2 uvs[] = {
-//    vec2(1.0f,1.0f),
-//    vec2(1.0f,0.0f),
-//    vec2(0.0f,0.0f),
-//    vec2(0.0f,1.0f)
-//};
-
 int main()
 {
     Window* win = Window::CreateWindow();
 
     Shader* SampleTriangleShader = Shader::CreateShader("HelloTriangle_VS.glsl", "HelloTriangle_FS.glsl");
     
-    vec4 color = vec4(1, 1, 1, 1);
-    SampleTriangleShader->Use();
-    SampleTriangleShader->SetVec4("ourColor", color);
+    // Set the renderer color
+    //vec4 color = vec4(1, 1, 1, 1);
+    //SampleTriangleShader->Use();
+    //SampleTriangleShader->SetVec4("ourColor", color);
 
+    // Load the texture from a file
     Texture texture;
     texture.LoadTexture("004_stone.png");
     
+    // Create the mesh material
     MeshMaterial* mat = new MeshMaterial(SampleTriangleShader, texture);
-    mat->SetVec4("ourColor", vec4(0, 1, 0, 0));
-
+    mat->Use();
+    mat->SetVec4("ourColor", vec4(1, 1, 1, 1));
+    
+    /// Create a Cube
     vec3 vertices[4 * 6];
     vec2 uvs[4 * 6];
     int tris[6 * 6];
@@ -80,6 +63,9 @@ int main()
     MeshRenderer* mr = new MeshRenderer(mat, mesh);
     mr->name = "HelloTriangle";
 
+    MeshRenderer* mR = new MeshRenderer(mat, mesh);
+    mR->name = "HelloTriangle1";
+
     auto cam = win->scene.Instantiate(dynamic_cast<SceneObject*>(new Camera()));
     win->scene.mainCam = dynamic_cast<Camera*>(cam);
     win->scene.mainCam->transform.SetPosition(vec3(0, 0, -4));
@@ -91,6 +77,8 @@ int main()
     cout << mr->transform.ToString();
 
     win->scene.Instantiate(dynamic_cast<SceneObject*>(mr));
+    win->scene.Instantiate(dynamic_cast<SceneObject*>(mR), vec3(2,0,0));
+
 
     win->StartApplication();
 

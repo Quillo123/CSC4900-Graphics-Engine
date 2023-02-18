@@ -87,15 +87,6 @@ ivec2 Graphics_Engine::Window::Resolution()
     return _resolution;
 }
 
-/// <summary>
-/// Returns true if a Key is pressed
-/// </summary>
-/// <param name="key">The GLFW KeyCode</param>
-bool Graphics_Engine::Window::GetKeyPressed(int key)
-{
-    return glfwGetKey(window, key);
-}
-
 float Graphics_Engine::Window::GetTime()
 {
     return glfwGetTime();

@@ -35,7 +35,6 @@ namespace Graphics_Engine {
 		//Helpers 
 		float lastTime = 0;
 
-		bool GetKeyPressed(int key);
 		float GetTime();
 		float DeltaTime();
 	private:
