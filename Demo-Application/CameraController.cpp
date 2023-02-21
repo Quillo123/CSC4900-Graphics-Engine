@@ -5,6 +5,8 @@
 
 void CameraController::Start()
 {
+	transform.SetPosition(0, 0, -3);
+	transform.SetRotation(0, 0, 0);
 	camera = Window::main->scene.mainCam;
 }
 
@@ -12,10 +14,10 @@ void CameraController::Update()
 {
 	// Change Position
 	if (Input::GetKeyPressed(KeyCode::W)) {
-		inputDir += vec3(0, 0, 1);
+		inputDir += vec3(0, 0, 1) * transform.Forward();
 	}
 	if (Input::GetKeyPressed(KeyCode::S)) {
-		inputDir += vec3(0, 0, -1);
+		inputDir += vec3(0, 0, -1) * transform.Forward();
 	}
 	if (Input::GetKeyPressed(KeyCode::A)) {
 		inputDir += vec3(1, 0, 0);
@@ -40,7 +42,14 @@ void CameraController::Update()
 		Window::main->scene.Instantiate(sceneObject, transform.GetPosition() + transform.GetRotation() * 2.0f);
 	}
 
-	camera->transform.SetPosition(camera->transform.GetPosition() + inputDir * speed * Window::main->DeltaTime());
+	
+
+	transform.SetPosition(transform.GetPosition() + inputDir * speed * Window::main->DeltaTime());
+	//transform.SetRotation(0,sin(Window::main->GetTime()), 0);
+	
+	camera->transform.SetPosition(-transform.GetPosition());
+	camera->transform.SetRotation(-transform.GetRotation());
+
 	inputDir = vec3(0, 0, 0);
 }
 

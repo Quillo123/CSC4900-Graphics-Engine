@@ -74,11 +74,11 @@ int main()
     auto camControl = win->scene.Instantiate(dynamic_cast<SceneObject*>(new CameraController()));
 
     //mr->transform.SetRotation(vec3(0.3f, 0, 0.3f));
-    cout << mr->transform.ToString();
 
-    win->scene.Instantiate(dynamic_cast<SceneObject*>(mr));
-    win->scene.Instantiate(dynamic_cast<SceneObject*>(mR), vec3(2,0,0));
-
+    auto v = win->scene.Instantiate(dynamic_cast<SceneObject*>(mr));
+    auto c = win->scene.Instantiate(dynamic_cast<SceneObject*>(mR), vec3(2,0,0));
+    cout << v->transform.ToString() << endl;
+    cout << c->transform.ToString() << endl;
 
     win->StartApplication();
 

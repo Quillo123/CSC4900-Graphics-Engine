@@ -22,6 +22,8 @@ namespace Graphics_Engine {
 
 		void Start() override;
 
+		void Render() override;
+
 		void Update() override;
 
 		SceneObject* Copy() override;

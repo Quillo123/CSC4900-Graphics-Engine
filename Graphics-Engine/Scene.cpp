@@ -94,6 +94,14 @@ void Graphics_Engine::Scene::Update()
     }
 }
 
+void Graphics_Engine::Scene::Render()
+{
+    for (auto const& [key, val] : objects)
+    {
+        val->Render();
+    }
+}
+
 void Graphics_Engine::Scene::AddObject(SceneObject* object, bool override)
 {
     if (override) {

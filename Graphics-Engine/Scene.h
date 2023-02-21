@@ -41,6 +41,8 @@ namespace Graphics_Engine {
 
 		void Update();
 
+		void Render();
+
 	private:
 		void AddObject(SceneObject* object, bool override = false);
 

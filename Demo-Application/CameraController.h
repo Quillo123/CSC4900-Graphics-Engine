@@ -9,7 +9,7 @@ class CameraController : public SceneObject
 public:
 	Camera* camera;
 
-	float speed = 100;
+	float speed = 200;
 	float rotationSpeed = 100;
 	vec3 inputDir = vec3(0, 0, 0);
 

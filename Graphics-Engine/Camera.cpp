@@ -38,7 +38,7 @@ mat4 Graphics_Engine::Camera::GetProjectionMatrix()
 
 mat4 Graphics_Engine::Camera::GetViewMatrix()
 {
-	return transform.Model();
+	return inverse(transform.Model());
 }
 
 void Graphics_Engine::Camera::ReloadProjectionMatrix()

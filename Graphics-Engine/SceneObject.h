@@ -16,12 +16,14 @@ namespace Graphics_Engine {
 		/// <summary>
 		/// Called when the object is first loaded
 		/// </summary>
-		virtual void Start() = 0;
+		virtual void Start() {}
 
 		/// <summary>
 		/// Called every frame;
 		/// </summary>
-		virtual void Update() = 0;
+		virtual void Update() {}
+
+		virtual void Render(){}
 
 		/// <summary>
 		/// Returns a deep copy of the object

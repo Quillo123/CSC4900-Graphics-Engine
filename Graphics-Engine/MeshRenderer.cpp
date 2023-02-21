@@ -37,10 +37,9 @@ void Graphics_Engine::MeshRenderer::Start()
 	
 }
 
-void Graphics_Engine::MeshRenderer::Update()
+void Graphics_Engine::MeshRenderer::Render()
 {
 	glEnable(GL_DEPTH_TEST);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	_material->Use();
 	_mesh->Use();
 	_material->SetMat4("model", transform.Model());
@@ -49,6 +48,13 @@ void Graphics_Engine::MeshRenderer::Update()
 
 	glDrawElements(GL_TRIANGLES, _mesh->GetTrianglesLength(), GL_UNSIGNED_INT, 0);
 	_mesh->UnUse();
+}
+
+void Graphics_Engine::MeshRenderer::Update()
+{
+	float t = Window::main->GetTime();
+	//transform.SetRotation(0, sin(t), 0);
+	//transform.SetScale(sin(t)+1, cos(t)+1, sin(t)+1);
 }
 
 SceneObject* Graphics_Engine::MeshRenderer::Copy()
