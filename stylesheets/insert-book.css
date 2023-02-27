@@ -1,0 +1,19 @@
+.checkB {
+    margin-left: 2%;
+    margin-bottom: 3%;
+
+}
+
+.authorsForm{
+    border: solid black 2px;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    min-height: 100px;
+    padding: 2%;
+}
+
+#numAuthors {
+    width: 100px;
+    margin-bottom: 2%;
+}

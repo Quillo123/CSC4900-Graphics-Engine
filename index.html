@@ -1,13 +1,149 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="utf-8">
-	<title></title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Noah's Books</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="stylesheets/default.css">
+    <link rel="stylesheet" href="stylesheets/index.css">
 </head>
-<body>
+<body class="background">
+<nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="#">Noah's Books</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
-    <h1>Hello World</h1>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="index.html">Home</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarBooks" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Books
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarBooks">
+                    <a class="dropdown-item" href="books.html">All Books</a>
+                    <a class="dropdown-item" href="show-book.html">Find Book</a>
+                    <a class="dropdown-item" href="insert-book.html">Add Book</a>
+                    <a class="dropdown-item" href="update-book.html">Update Book</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="delete-book.html">Delete</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarAuthors" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Authors
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarAuthors">
+                    <a class="dropdown-item" href="authors.html">All Authors</a>
+                    <a class="dropdown-item" href="show-author.html">Find Author</a>
+                    <a class="dropdown-item" href="insert-author.html">Add Author</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
 
+<div class="container-fluid name">
+    <h1>Noah's Books</h1>
+</div>
+
+<div class="container">
+    <h3>
+        This is Noah Gallo's final project for CSC3221 Netcentric Computing.
+    </h3>
+    <p>
+        The Backend for this site can be found at <a href="https://noahgallo-netcentric-final.herokuapp.com/">https://noahgallo-netcentric-final.herokuapp.com/</a>
+    </p>
+</div>
+
+<div class="container" id="insertInstructions">
+    <h4>Book Operations</h4>
+    <p style="padding-left: 2%">
+         * = 'https://noahgallo-netcentric-final.herokuapp.com'
+    </p>
+    <ul>
+        <li>
+            <h5>GET</h5>
+            <ul>
+                <li>
+                    <h6>*/api/books/</h6>
+                    <p>returns all the books as a json array.</p>
+                    <p>Including a Path Variable of "title" will return the book with the specified title</p>
+                </li>
+                <li>
+                    <h6>*/api/books/:id</h6>
+                    <p>returns the book of the specified id</p>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <h5>POST</h5>
+            <ul>
+                <li>
+                    <h6>*/api/books/</h6>
+                    <p>Post with path variables in the following Format:</p>
+                    <ul>
+                        <li>title = [string]</li>
+                        <li>description = [string]</li>
+                        <li>price = [number]</li>
+                        <li>year = [number]</li>
+                        <li>hardcover = [bool]</li>
+                        <li>authors[0]['name'] = [string]</li>
+                        <li>authors[0]['nationality'] = [string]</li>
+                        <li>authors[1]['name']=[string]</li>
+                        <li>authors[1]['nationality'] = [string]</li>
+                    </ul>
+                    <p style="font-size: 15px;"> - Authors must start from 0 and must not skip Integers. You May add as many as needed, just keep increasing the number.</p>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <h5>PATCH</h5>
+            <ul>
+                <li>
+                    <h6>*/api/books/:id</h6>
+                    <p>Use the same variable formats POST uses</p>
+                    <ul>
+                        <li>title = [string]</li>
+                        <li>description = [string]</li>
+                        <li>price = [number]</li>
+                        <li>year = [number]</li>
+                        <li>hardcover = [bool]</li>
+                        <li>authors[0] = [ID]</li>
+                        <li>authors[1] = [ID]</li>
+                    </ul>
+                    <p style="font-size: 15px;"> - Patching for Authors requires that you use the ID of an existing Author </p>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <h5>Delete</h5>
+            <ul>
+                <li>
+                    <h6>*/api/books/:id</h6>
+                    <p>Deletes the specified ID</p>
+                </li>
+            </ul>
+        </li>
+
+    </ul>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
 </body>
 </html>

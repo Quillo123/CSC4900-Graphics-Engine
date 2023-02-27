@@ -1,0 +1,70 @@
+body {
+    height: 100%;
+    padding-bottom: 50%;
+}
+
+.background {
+    height: 100%;
+
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+.name {
+    padding: 1%;
+}
+
+.name h1 {
+    width: fit-content;
+    min-width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+
+    color: black;
+    text-align: center;
+    font-size: 140px;
+
+}
+
+nav {
+    font-size: 25px;
+}
+
+nav li {
+    border-right: solid 1px darkred;
+}
+
+.heading {
+    max-width: 80%;
+    margin-top: 2%;
+    padding: 1%;
+}
+
+.heading h2 {
+    text-align: center;
+    font-size: 100px;
+    color: black;
+}
+
+.content{
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.contentTable{
+    height: 50%;
+}
+
+.errorOutput{
+    text-align: center;
+    font-size: 45px;
+    height: 25%;
+    padding: 5%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    border: solid black 2px;
+
+}
