@@ -1,4 +1,4 @@
-body {
+/* body {
     height: 100%;
     padding-bottom: 50%;
 }
@@ -10,6 +10,7 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
+    background-color: black;
 }
 
 .name {
@@ -22,7 +23,7 @@ body {
     margin-left: auto;
     margin-right: auto;
 
-    color: black;
+    color: white;
     text-align: center;
     font-size: 140px;
 
@@ -30,10 +31,12 @@ body {
 
 nav {
     font-size: 25px;
+    color: white;
 }
 
 nav li {
     border-right: solid 1px darkred;
+    color: white;
 }
 
 .heading {
@@ -45,7 +48,7 @@ nav li {
 .heading h2 {
     text-align: center;
     font-size: 100px;
-    color: black;
+    color: white;
 }
 
 .content{
@@ -67,4 +70,4 @@ nav li {
     margin-bottom: 5%;
     border: solid black 2px;
 
-}
+} */
