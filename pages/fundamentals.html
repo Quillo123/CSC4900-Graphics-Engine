@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>CSC4900 Graphics Engine</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="stylesheets/default.css">
+    <link rel="stylesheet" href="stylesheets/index.css">
+</head>
+
+<body class="background bg-dark text-white" style="padding-bottom: 50%;">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
+        <a class="navbar-brand" href="index.html">Graphics API</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="./index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./experience.html">My Experience</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarBooks" role="button" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        The Project
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarBooks">
+                        <a class="dropdown-item" href="./fundamentals.html">Fundamentals</a>
+                        <a class="dropdown-item" href="./installation.html">Installation and Setup</a>
+                        <a class="dropdown-item" href="./documentation.html">Documentation</a>
+                        <a class="dropdown-item" href="./sample.html">Sample Application</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./references.html">References</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+
+    <!-- Title ******************************************************************************** -->
+    <div class="container-fluid text-center">
+        <h1 class="display-2 pt-4 mb-5">
+            Fundamentals of Graphics Programming
+        </h1>
+    </div>
+
+    <!-- Linear Algebra ******************************************************************************** -->
+    <div class="container-fluid w-75 pl-4">
+        <button class="display-4 bg-dark text-white border-0" data-toggle="collapse" href="#LinearAlgebra" role="button"
+            aria-expanded="false" aria-controls="collapseExample">
+            Prerequisite
+        </button>
+        <div class="collapse" id="LinearAlgebra">
+            <h3 class="display-5 pt-3 pl-3">
+                Linear Algebra
+            </h3>
+            <p class="lead pl-4 p-1">
+                There are a lot of technical elements to graphics programming, especially when it comes to 3D Math.
+                Before getting into the details, ensure that you have a basic understanding of linear algebra, and
+                working with
+                vectors, matrices, and matrix transformation. You don't need to know exactly how the underlying math
+                works, but
+                just know the basics of how to use it. I'm going to assume for the sake of space that you have a basic
+                understanding
+                of these topics, though I will go over some topics in future sections.
+            </p>
+
+            <h3 class="display-5 pt-3 pl-3">
+                Programming 
+            </h3>
+            <p class="lead pl-4 p-1">
+                TODO
+            </p>
+        </div>
+        <hr class="my-4 border-white">
+    </div>
+    <!-- 3D Mesh ******************************************************************************** -->
+    <div class="container-fluid w-75 pl-4">
+        <button class="display-4 bg-dark text-white border-0" data-toggle="collapse" href="#Mesh" role="button"
+            aria-expanded="false" aria-controls="collapseExample">
+            3D Meshes
+        </button>
+        <div class="collapse" id="Mesh">
+            <p class="lead pl-4 p-1">
+                When rendering a 3D object, we create what are known as meshes. Meshes are a collection of vertices
+                (3D positions) that we wrap into triangles.
+            </p>
+            <p class="lead pl-4 p-1">Here's a representation of a square mesh, also known as a quad:</p>
+            <img src="./images/3D Mesh.png" class="rounded ml-5 d-block" width="500" height="500">
+            <p class="lead pl-4 p-1">
+                In this example, the square is made up of 4 vertices and 2 triangles.
+                For convenience, I labled the vertices A,B,C,D.
+                <br>
+                Let's say that C is the origin of our graph such that:
+            </p>
+            <p class="lead pl-4 p-1">
+                A = (0,1,0), B = (1,1,0), C = (0,0,0) and D = (1,0,0)
+            </p>
+            <p class="lead pl-4 p-1">
+                There are 2 ways of representing these meshes in memory. The first is relatvely simple, just store
+                an array of vertices, with every 3 vertices making up a triangle.
+            </p>
+            <pre class="lead  ml-4 mr-4 text-white bg-secondary rounded border border-dark"><code>
+    vec3[] <var>vertices</var> = { 
+        A, B, D,    // The first triangle
+        A, D, C     // The second triangle
+    }
+        </code></pre>
+            <p class="lead pl-4 p-1">
+                However, you'll notice that using this method, we end up storing some vertices twice,
+                and when you start creating larger 3D meshes, this problem get's exponentially worse.
+                It would be better to store each vertex only once. The second way of storing a mesh solves
+                this problem.
+                <br>
+                In the second method, we use 2 arrays. The first array is a list of all the vertices in the mesh,
+                the second is a list of indices that represent the triangles of the array.
+            </p>
+            <pre class="lead ml-4 mr-4 text-white bg-secondary rounded border border-dark"><code>
+    vec3[] <var>vertices</var> = { 
+        A, B, C, D  // A list of the vertices with no duplicates
+    }
+    
+    int[] <var>triangles</var> = {
+        1, 2, 4,    // The first triangle
+        1, 4, 3     // The second triangle
+    }
+        </code></pre>
+            <p class="lead pl-4 p-1">
+                One thing to note when creating 3D meshes, the direction in which you draw the triangles is important.
+                All triangles must be wrapped in a clockwise direction, otherwise they will render inside out.
+                The direction of the triangle is based on the order you store it in.
+                <br>
+                <br>
+                So, { A, D, B } is backwards since it is wrapped counter-clockwise,
+                instead, you want to store it as { A, B, D }.
+                <br>
+                <br>
+                Also, as long as they are wrapped clockwise, the order doesn't matter,
+                so { A, B, D } is equivilant to { D, A, B } since they are wrapped in the same directions.
+            </p>
+    
+        </div>
+        <hr class="my-4 border-white">
+    </div>
+
+    <!-- Memory Buffers ******************************************************************************** -->
+    <div class="container-fluid w-75 pl-4">
+        <button class="display-4 bg-dark text-white border-0" data-toggle="collapse" href="#MemoryBuffer" role="button"
+            aria-expanded="false" aria-controls="MemoryBuffer">
+            Memory Buffers
+        </button>
+        <div class="collapse" id="MemoryBuffer">
+            <p class="lead pl-4 p-1">
+                In order to render objects using the GPU, we first have to get the mesh data
+                to the GPU. In OpenGL, we do this using buffers. Buffers can be used to store
+                all sorts of data, but generally, we use it for storing vertex information.
+    
+    
+    
+                When storing vertices on the GPU, we also have the ability to store other
+                data with each vertex. For example, you may want to store a color with each vertex
+                so that you can set the object to whatever colors you want.
+            </p>
+        </div>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
