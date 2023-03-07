@@ -153,6 +153,38 @@
         <hr class="my-4 border-white">
     </div>
 
+    <!-- Matrix Transformations ******************************************************************************** -->
+    <div class="container-fluid w-75 pl-4">
+        <button class="display-4 bg-dark text-white border-0" data-toggle="collapse" href="#MatrixTransformations" role="button"
+            aria-expanded="false" aria-controls="MatrixTransformations">
+            Matrix Transformation
+        </button>
+        <div class="collapse" id="MatrixTransformations">
+            <p class="lead pl-4 p-1">
+                If you've taken a course in Linear Algebra, you've probably heard of matrix transformation. If you are
+                like me, however, you probably wondered how these transformations could be useful. In graphics programming
+                matrix transformations are absolutely essential to everything we do. 
+                <br>
+                In this section, I amnot going to go over how matrices or matrix transformations work. Instead, I will 
+                simply explain how we use them in when writing code. If you'd like to see a bit more of the math behind it, 
+                check out <a href="https://learnopengl.com/Getting-started/Transformations">Learn OpenGL</a>. He goes over the 
+                basics of transformations and how they work. 
+                <br>
+                <br>
+                There are 3 core matrices used in rendering: model matrix, view matrix, and projection matrix. Each of these
+                matrices transforms points to their own respective spaces. The <u><b>model matrix</b></u> transforms from 
+                local space to world space (<b>Local Space</b> refers to the mesh objects vertices origin). The 
+                <u><b>view matrix</b></u> converts from world space to view space (<b>View space</b> refers to where the camera
+                is poitioned in the world). The <u><b>projection matrix</b></u> converts the view space into clip space (<b>Clip space</b>
+                is what the camera can actually see in the world). Finally, after all that is done, one more autmatic transformation
+                is performed to convert clip space into actual screen space. 
+                <br>
+                <a href="https://learnopengl.com/img/getting-started/coordinate_systems.png">Here's</a> a good diagram of this
+            </p>
+        </div>
+        <hr class="my-4 border-white">
+    </div>
+
     <!-- Memory Buffers ******************************************************************************** -->
     <div class="container-fluid w-75 pl-4">
         <button class="display-4 bg-dark text-white border-0" data-toggle="collapse" href="#MemoryBuffer" role="button"
@@ -162,19 +194,106 @@
         <div class="collapse" id="MemoryBuffer">
             <p class="lead pl-4 p-1">
                 In order to render objects using the GPU, we first have to get the mesh data
-                to the GPU. In OpenGL, we do this using buffers. Buffers can be used to store
-                all sorts of data, but generally, we use it for storing vertex information.
+                to the GPU. In OpenGL, we do this using buffers. A <u><b>GPU buffer</b></u> is simply an array of bytes
+                stored in the GPU memory for use in shader programs. Buffers can be used to store
+                all sorts of data, but generally, we use it for storing vertex information. 
+                This vertex info is going to be stored in an array of values on the GPU. The 
+                most basic thing you need to store is just the position data of each vertex. 
+                <br>
+                <br>
+                In the buffer below, you simply have a an array of floats, where every 3 floats
+                represents a vertex. 
             </p>
             <img src="./images/Vertex Buffer.png" class="rounded ml-5 d-block">
             <p class="lead pl-4 p-1">    
-                When storing vertices on the GPU, we also have the ability to store other
-                data with each vertex. For example, you may want to store a color with each vertex
-                so that you can set the object to whatever colors you want.
+                However, when rendering a mesh, you often need more than just the vertex positions
+                but sometimes want to store other information as well. 
+                For this reason, when we store vertices on the GPU, we also have the ability to store other
+                data with each vertex. This data could be a color, a texture position (also known as a <u><b>UV</b></u>), a normal value (important
+                for lighting), or any other data that can be represented as primitve data types with static size.
+                <br>
+                <br>
+                Here's an example of the array when storing more data:
             </p>
             <img src="./images/Mesh Buffer.png" class="rounded ml-5 d-block" width="100%">
+            <p class="lead pl-4 p-1">    
+                <br>
+                When creating these arrays, it's important to keep track of the stride
+                of your vertex data. The <u><b>stride</b></u> is the distance from the start of one vertex to 
+                the start of the next vertex. Since you might store different types of data (like floats
+                or ints), the stride is simply the count of bytes your vertex takes up. In the example 
+                above, the stride is 9 * sizeof(float) or 36 bytes (since a float is 4 bytes). 
+                <br>
+                <br>
+                Now the question is, how do we access and use this vertex data? In the next section we will cover
+                how to create shaders for running programs on the GPU itself. 
+            </p>
+
         </div>
+        <hr class="my-4 border-white">
     </div>
 
+    <!-- Shaders ******************************************************************************** -->
+    <div class="container-fluid w-75 pl-4">
+        <button class="display-4 bg-dark text-white border-0" data-toggle="collapse" href="#Shaders" role="button"
+            aria-expanded="false" aria-controls="Shaders">
+            Shaders
+        </button>
+        <div class="collapse" id="Shaders">
+            <p class="lead pl-4 p-1">
+                Now that we have our Mesh, and we've moved it to the GPU, we have to actually render it
+                using the GPU. <u><b>Shaders</b></u> are programs stored on the GPU that can be run in parallel for large 
+                sets of data. This is what makes the GPU so efficient for rendering items on the screen. We could have 
+                thousands of vertices on the screen at a any given time. If we were to render each of these vertices 
+                one at it time, it would take forever to render even a single frame, let alone 60 frames each second. 
+                The GPU, however, has potentially thousands of cores that can all run in parallel. However, while it has a 
+                lot of cores, each of the cores is significantly smaller than a typical CPU core. As a result, programs 
+                run on the GPU are limited in size, and should primarily be used for performin mathmatical operations with as 
+                few branches as possible. 
+                <br>
+                <br>
+                There are six stages to the render pipeline that all run in a linear sequence:
+                <br>
+            </p>
+            <h5 class="display-5 pl-5"><u ><b>Vertex Shader</b></u> -> Shape Assembly -> <u><b>Geometry Shader</b></u> -> 
+                Tests and Blending -> <u><b>Fragment Shader</b></u> -> Rasterization </h5>
+            <p class="lead pl-4 p-1"> 
+                For most graphics programmers, we only really care about the Vertex Shader and the Fragment Shader
+                stages of the pipeline, everything else is done automatically for us (though occasionally we may modify 
+                the geometry shader, but I won't be going over that). 
+                <br>
+                Before we get into the specifics of the Vertex and Fragment Shader, lets go over a few general concepts 
+                in he shader world: <u>input</u>, <u>output</u>, and <u>uniforms</u>. 
+                <br>
+                <br>
+                <u>Inputs and Outputs:</u>
+                Every stage of the shader process has a series of inputs and outputs. These inputs are the outputs created 
+                after the previous stage of the render pipeline completed. In general, you can think of the render pipeline 
+                as being a conveyer with a bunch of machines that moves the data along from one machine to another.
+                Each of these machines takes in the data and transform it, until at the very end you have an image that 
+                can be drawn to the screen. So, the input of one machine is the output of another.  
+                <br>
+                <br>
+                <u>Uniforms:</u>
+                When writing shaders, there is often some data that will be the same for every vertex in a mesh. 
+                These are called uniforms. Uniforms can be used for all sorts of things. For example, you may want to
+                color your whole object a single color. Rather than store a color value on every vertex, you can store one 
+                uniform color, and use that on each vertex in the shader. Uniforms are used all over the place, because 
+                often an object, while made up of many vertices, has object-wide properties that we don't want to store
+                in every vertex. 
+
+            </p>
+            <h5 class="display-5 pl-3 text-white u">Vertex Shader</h5>
+            <p class="lead pl-4 p-1">
+                The Vertex Shader is the first stage of the render pipeline and run over every vertex in your mesh. 
+                Since the vertex shader is the first stage of the pipeline it's input is provided from the CPU in the
+                form of a vertex buffer. The primary output of the vertex shader is the screen-view position of the 
+                vertex (the normalized (x,y,z) position in relation to the OpenGL window also known as normalized
+                device coordinates).
+                
+            </p>
+        </div>
+    </div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
