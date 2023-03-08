@@ -8,10 +8,11 @@
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="stylesheets/default.css">
     <link rel="stylesheet" href="stylesheets/index.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 </head>
 <body class="background bg-dark text-white">
 <nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
-    <a class="navbar-brand" href="index.html">Graphics API</a>
+    <a class="navbar-brand" href="index.html">Graphics Engine</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -46,7 +47,7 @@
 
 <!-- Title ******************************************************************************** -->
 <div class="container">
-    <h1 class="border-bottom p-4 ">
+    <h1 class="display-4 border-bottom pt-4">
         CSC4900 Graphics Engine Building Final Project
     </h1>
 </div>
@@ -55,25 +56,60 @@
 <div class="container mt-3" id="insertInstructions">
     
 <!-- About Me ******************************************************************************** -->
-    <h4 class="border-bottom">About Me</h4>
-    <p>
+    <h4 class="display-5 border-bottom">About Me</h4>
+    <p class="lead pl-4 p-1">
         My name is Noah Gallo, and I'm a student at Seattle Pacific University studying computer science,
         and this site covers my independent study project and learnings. 
     </p>
     
 <!-- About The Project******************************************************************************** -->
-    <h4 class="border-bottom">About the Project</h4>
-    <p>
+    <h4 class="display-5 border-bottom">About the Project</h4>
+    <p class="lead pl-4 p-1">
         This is a graphics library created as part of an independent study course conducted 
         through Seattle Pacific University and in partnership of Dr. Carlos Arias. <b>This Library was 
         created for educational purposes only.</b>     
     </p>
-    <p> 
+    <p class="lead pl-4 p-1"> 
          The Library is created in C++ using the OpenGL rendering pipeline. The API consists of the core set 
         of materials needed for rendering 3D meshes, using a Unity-like scene management system.   
     </p>
 
+<!-- What is OpenGL******************************************************************************** -->
+    <h4 class="display-5 border-bottom">What is OpenGL</h4>
+
+    <p class="lead pl-4 p-1">
+    
+        OpenGL is an API specification that allows for interfacing with a computer's GPU. The specification is managed by
+        <a href="https://www.khronos.org/" target="_blank"><b>Khronos</b></a> 
+        and implemented by individual graphics card manufacturers.
+        <br>
+        <br>
+        The OpenGL API Specification only provides the input/outputs of the API Methods. It is up to the manufacturer to implement 
+        the API as they see fit. Not all OpenGL APIs are identical, but from the user's perspective, they should all act the same.
+        <br>
+        <br>
+        OpenGL has many different versions and extensions. Most of the code found in this repository is assuming OpenGL version 3.3 
+        core with no extensions. While further versions have been created, all methods of the 3.3 core API are guaranteed in bother 
+        new and old graphics drivers. Future versions add improved functionality, but not all methods are guaranteed, especially on older GPUs.
+    </p>
 </div>
+
+<footer class="bg-secondary pt-2">
+    <div class="row pr-3 pl-3">
+        <div class="col">
+            <p class="">
+                Author: Noah Gallo
+            </p>
+        </div>
+        <div class="col">
+            <p class="text-light text-right">
+                <a class="text-light" href="https://github.com/Quillo123" target="_blank">GitHub <i class="fab fa-github"></i></a>
+                <br>
+                <a class="text-light" href="https://www.linkedin.com/in/noah-gallo-312980182/" target="_blank">LinkedIn <i class="fab fa-linkedin-in"></i></a>
+            </p>
+        </div>
+    </div>
+</footer>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

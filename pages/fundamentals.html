@@ -9,11 +9,12 @@
         integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="stylesheets/default.css">
     <link rel="stylesheet" href="stylesheets/index.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 </head>
 
-<body class="background bg-dark text-white" style="padding-bottom: 50%;">
+<body class="background bg-dark text-white">
     <nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
-        <a class="navbar-brand" href="index.html">Graphics API</a>
+        <a class="navbar-brand" href="index.html">Graphics Engine</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -21,13 +22,13 @@
 
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a class="nav-link" href="./index.html">Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="./experience.html">My Experience</a>
                 </li>
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown active">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarBooks" role="button" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
                         The Project
@@ -48,15 +49,22 @@
 
 
     <!-- Title ******************************************************************************** -->
-    <div class="container-fluid text-center">
-        <h1 class="display-2 pt-4 mb-5">
+    <div class="container-fluid w-75">
+        <h1 class="display-4 border-bottom pt-4 text-center">
             Fundamentals of Graphics Programming
         </h1>
+        <p class="lead pl-4 p-1">
+            This page is an overview of some of the fundamentals in Graphics Programming. 
+            While there are some code samples, this section doesn't go through the specific C++ Code and OpenGL API calls
+            used to access the Render Pipeline, and is just meant to be a conceptual overview of the project. 
+            To see the actual code, please checkout the project on GitHub 
+            (<a href="https://github.com/Quillo123/CSC4900-Graphics-Engine" target="_blank">CSC4900 Graphics Engine Building </a>)
+        </p>
     </div>
 
-    <!-- Linear Algebra ******************************************************************************** -->
+    <!-- Prerequisites ******************************************************************************** -->
     <div class="container-fluid w-75 pl-4">
-        <button class="display-4 bg-dark text-white border-0" data-toggle="collapse" href="#LinearAlgebra" role="button"
+        <button class="display-4     bg-dark text-white border-0" data-toggle="collapse" href="#LinearAlgebra" role="button"
             aria-expanded="false" aria-controls="collapseExample">
             Prerequisite
         </button>
@@ -79,7 +87,9 @@
                 Programming 
             </h3>
             <p class="lead pl-4 p-1">
-                TODO
+                You will need a good grasp of programming fundamentals. While I don't go into the specifics of OpenGL code here, 
+                the engine is built in C++, and any sample code in this section uses C-like syntax. Having a good grasp of C++ 
+                and the fundamentals of computer memory and memory management will be useful in better understanding the sections below.  
             </p>
         </div>
         <hr class="my-4 border-white">
@@ -164,22 +174,30 @@
                 If you've taken a course in Linear Algebra, you've probably heard of matrix transformation. If you are
                 like me, however, you probably wondered how these transformations could be useful. In graphics programming
                 matrix transformations are absolutely essential to everything we do. 
-                <br>
-                In this section, I amnot going to go over how matrices or matrix transformations work. Instead, I will 
+                In this section, I am not going to go over how matrices or matrix transformations work. Instead, I will 
                 simply explain how we use them in when writing code. If you'd like to see a bit more of the math behind it, 
                 check out <a href="https://learnopengl.com/Getting-started/Transformations">Learn OpenGL</a>. He goes over the 
-                basics of transformations and how they work. 
+                basics of transformations and how they work. For a more in-depth look into matrix math, there are plenty of 
+                resources and tutorials on the internet. 
                 <br>
                 <br>
-                There are 3 core matrices used in rendering: model matrix, view matrix, and projection matrix. Each of these
-                matrices transforms points to their own respective spaces. The <u><b>model matrix</b></u> transforms from 
-                local space to world space (<b>Local Space</b> refers to the mesh objects vertices origin). The 
-                <u><b>view matrix</b></u> converts from world space to view space (<b>View space</b> refers to where the camera
-                is poitioned in the world). The <u><b>projection matrix</b></u> converts the view space into clip space (<b>Clip space</b>
+                There are 3 core matrices used in rendering: the model matrix, view matrix, and projection matrix. Each of these
+                matrices transforms points from one space to another, allowing graphics programmers to easily swap between different 
+                spaces. The <u><b>model matrix</b></u> transforms from 
+                local space to world space (<b>Local Space</b> refers to the mesh objects vertices origin. <b>World Space</b> refers to 
+                what the Graphics Programmer defines as the scenes actual space, based around the origin). The 
+                <u><b>view matrix</b></u> converts from world space to view space (<b>View space</b> refers to where the space about the camera's 
+                position in the world). The <u><b>projection matrix</b></u> converts the view space into clip space (<b>Clip space</b>
                 is what the camera can actually see in the world). Finally, after all that is done, one more autmatic transformation
                 is performed to convert clip space into actual screen space. 
                 <br>
                 <a href="https://learnopengl.com/img/getting-started/coordinate_systems.png">Here's</a> a good diagram of this
+                <br>
+                <br>
+                By using these transformations, we can now create 3D meshes in their own "model" space, and easily convert each of it's vertices to world
+                space. We can also take each of these vertices, and then convert them into coordinates that fit within the viewport of 
+                the users device. With these transformations, we now have the mathematical tools that we need in order to turn a 3D object into 
+                a 2D image on a screen. 
             </p>
         </div>
         <hr class="my-4 border-white">
@@ -290,10 +308,107 @@
                 form of a vertex buffer. The primary output of the vertex shader is the screen-view position of the 
                 vertex (the normalized (x,y,z) position in relation to the OpenGL window also known as normalized
                 device coordinates).
-                
+                <br>
+                To achieve this output, we use the the matrix transformations above. However, all of these Matrices are 
+                used for transformations are kept on the CPU. This is where Uniforms come in handy. Before running the vertex 
+                shader, I make sure to create a Uniform for each of the matrices (model, view, and projection). Then, I simply 
+                multiply the vertex position by the matrices in the proper order. 
+                <br>
+                Here's the Vertex Shader used for rendering a mesh written in GLSL 3:
+            </p>
+                <pre class="lead  ml-4 mr-4 text-white bg-secondary rounded border border-dark"><code>
+    #version 330 core
+    layout (location = 0) in vec3 pos;  //Vertex Position Input
+    layout (location = 1) in vec2 uv0;  //Vertex Texture Position Attribute
+
+
+    out vec2 texCoord;                  //Output Texture Coordinate to fragment shader
+
+    uniform mat4 model;                 //The mesh model Matrix
+    uniform mat4 view;                  //The scene view matrix
+    uniform mat4 projection;            //The scene projection matrix
+
+
+    void main()
+    {
+        //Set the texure Texture Coordinate output
+        texCoord = vec2(uv0.x, uv0.y);
+        
+        //Set the default gl_position output 
+        gl_Position = projection * view * model  * vec4(pos, 1.0f);     
+    }
+                </code></pre> 
+            <p class="lead pl-4 p-1">     
+                <br>
+                As you can see, the shader looks a lot like a simple C program. The key difference is the variables declared at
+                the top are inputs and outputs. The 'pos' and 'uv0' are the vertex attribute input given. Inputs are defined 
+                using the 'in' keyword. The 'layout' keyword is used to tell the shader at what position in the vertex the input is
+                located at. After the input comes the use defined output, which in this case is the texture coordinate (the 2D position
+                in the texture that the vertex should display). There are also a few default ouputs, like gl_position is a that don't
+                have to be declared. Finally, the Uniforms are declared, which in this case are the 3 transformation matrices we will 
+                be using to get the screen position of the vertex (gl_position). 
+                <br>
+                <br>
+                After finishing in the Vertex Shader, the outputs are passed into the fragment shader.
+            </p>
+            <h5 class="display-5 pl-3 text-white u">Fragment Shader</h5>
+            <p class="lead pl-4 p-1"> 
+                The Fragment shader is one of the last stages of the render pipeline. The fragment shader is run for every fragment on the 
+                OpenGL window. For simplicity, you can think of these fragments as being the individual pixels on the screen (though sometimes
+                they are different sizes). The primary output of the fragment shader is the color that the current fragment should be rendered
+                as using an RGBA (red,green,blue,alpha) color encoding. We represent this color as a 4D Vector, where each position is a value
+                between 0 and 1. 
+                <br>
+                Here's the Fragment shader associated with the Vertex Shader above:
+            </p>
+                <pre class="lead  ml-4 mr-4 text-white bg-secondary rounded border border-dark"><code>
+    #version 330 core
+
+    in vec2 texCoord;               //The texture coordinate given to use by the vertex shader
+
+    out vec4 FragColor;             //The output color that the fragment will be drawn with
+
+    uniform vec4 ourColor;          //A Uniform that we use to modify the color of the entire object
+    uniform sampler2D ourTexture;   //The texture to draw on the surface of the object
+
+    void main()
+    {
+        //Set the color output to the texture color multiplied by object color
+        FragColor = texture(ourTexture, texCoord) * ourColor;  
+    }
+                </code></pre>   
+            <p class="lead pl-4 p-1">  
+                <br>
+                This time, you'll notice I didn't define my inputs using a location. Instead, I just have to make sure my input 
+                name matches the output name of the vertex shader. The compiler will automatically assign the outputs of the 
+                vertex shader to the inputs of the fragment shader. I have only 1 output in the fragment shader, and thats the 
+                fragment Color I want to draw to the screen. 
+                <br>
+                <br>
+                Using these 2 Shader's, we can create a Shader Program and compile it on the GPU. Once we do this, OpenGL
+                give's us a Shader ID, which we can use to tell the GPU which shader program we want to use when rendering our objects. 
             </p>
         </div>
     </div>
+
+
+
+    <footer class="bg-secondary pt-2">
+        <div class="row pr-3 pl-3">
+            <div class="col">
+                <p class="">
+                    Author: Noah Gallo
+                </p>
+            </div>
+            <div class="col">
+                <p class="text-light text-right">
+                    <a class="text-light" href="https://github.com/Quillo123" target="_blank">GitHub <i class="fab fa-github"></i></a>
+                    <br>
+                    <a class="text-light" href="https://www.linkedin.com/in/noah-gallo-312980182/" target="_blank">LinkedIn <i class="fab fa-linkedin-in"></i></a>
+                </p>
+            </div>
+        </div>
+    </footer>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
