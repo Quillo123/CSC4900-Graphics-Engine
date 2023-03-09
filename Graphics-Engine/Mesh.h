@@ -1,19 +1,26 @@
+#pragma once
 #include <glm/glm.hpp>
+#include <glad/glad.h>
 
 using namespace glm;
 
-#pragma once
 
 namespace Graphics_Engine {
-
+	/// <summary>
+	/// A class to manage meshes. 
+	/// <para>
+	/// Meshes are automatically stored in GPU memory, so only create one when needed. 
+	/// </para>
+	/// </summary>
 	class Mesh
 	{
 	public:
 
 
-		Mesh(int verticesLength, vec3* vertices, int trianglesLength, int* triangles);
+		Mesh(int verticesLength, vec3 vertices[], int trianglesLength, int triangles[]);
+		~Mesh();
 
-		void SetVertices(int length, vec3* verts);
+		void SetVertices(int length, vec3 verts[]);
 		vec3 GetVertex(int index);
 		int GetVerticesLength();
 
@@ -22,18 +29,35 @@ namespace Graphics_Engine {
 		int GetTrianglesLength();
 
 		void SetUvs0(int length, vec2* uvs);
-		vec2 GetUvs0Idex(int index);
-		int GetUvs0Length();
+		vec2 GetUvs0Index(int index);
+
+		void SetVertextBufferMode(GLenum drawMode);
+
+		void SetUsing();
+		void SetNotUsing();
+		bool IsInUse();
+
+		void Use();
+		void UnUse();
 
 	private:
-		int verticesLength;
-		vec3* vertices;
+		int _verticesLength;
+		vec3* _vertices;
+		vec2* _uvs0;
 
-		int trianglesLength;
-		int* triangles;
+		int _trianglesLength;
+		int* _triangles;
 
-		int uvs0Length;
-		vec2* uvs0;
+
+		GLenum _drawMode = GL_STATIC_DRAW;
+	
+		unsigned int _vertexBufferId;
+		unsigned int _trianglesBufferId;
+		unsigned int _vertexArrayId;
+
+		int _inUse;
+
+		void ReloadVertices();
 	};
 }
 

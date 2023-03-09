@@ -1,9 +1,8 @@
-﻿  glad.c
-  Mesh.cpp
-C:\Development\CSC4900-Graphics-Engine\Graphics-Engine\Mesh.h(12,8): warning C4200: nonstandard extension used: zero-sized array in struct/union
-C:\Development\CSC4900-Graphics-Engine\Graphics-Engine\Mesh.h(12,8): message : This member will be ignored by a defaulted constructor or copy/move assignment operator
-C:\Development\CSC4900-Graphics-Engine\Graphics-Engine\Mesh.h(13,7): error C2229: class 'Graphics_Engine::Mesh' has an illegal zero-sized array
-C:\Development\CSC4900-Graphics-Engine\Graphics-Engine\Mesh.h(13,7): warning C4200: nonstandard extension used: zero-sized array in struct/union
-C:\Development\CSC4900-Graphics-Engine\Graphics-Engine\Mesh.h(13,7): message : This member will be ignored by a defaulted constructor or copy/move assignment operator
+﻿  Camera.cpp
+  MeshRenderer.cpp
+  Transform.cpp
   Window.cpp
+C:\Development\CSC4900-Graphics-Engine\Graphics-Engine\Window.cpp(100,23): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+C:\Development\CSC4900-Graphics-Engine\Graphics-Engine\Window.cpp(105,26): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
   Generating Code...
+  Graphics-Engine.vcxproj -> C:\Development\CSC4900-Graphics-Engine\x64\Debug\Graphics-Engine.lib

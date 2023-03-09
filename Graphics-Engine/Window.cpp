@@ -6,6 +6,8 @@
 
 using namespace Graphics_Engine;
 
+Window* Window::main;
+
 Window* Window::CreateWindow()
 {
     Window* win = new Window();
@@ -16,7 +18,7 @@ Window* Window::CreateWindow()
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     //glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 
-    win->window = glfwCreateWindow(800, 600, "LearnOpenGL", NULL, NULL);
+    win->window = glfwCreateWindow(1920, 1080, "LearnOpenGL", NULL, NULL);
     if (win->window == NULL)
     {
         std::cout << "Failed to create GLFW window" << std::endl;
@@ -31,7 +33,8 @@ Window* Window::CreateWindow()
         return nullptr;
     }
 
-    glViewport(0, 0, 800, 600);
+    win->_resolution = ivec2(1920, 1080);
+    glViewport(0, 0,win->Resolution().x, win->Resolution().y);
 
     //Setting the window user pointer allows us to acces it from the GLFW object
     //using glfwGetWindowUserPointer(window)
@@ -39,32 +42,40 @@ Window* Window::CreateWindow()
 
     //Wraps the framebuffer_size_callback
     auto window_size_callback = [](GLFWwindow* window, int w, int h) {
-        Window* obj = static_cast<Window*>(glfwGetWindowUserPointer(window));
+        Window* obj = Window::main;
         assert(obj);
         obj->framebuffer_size_callback(window, w, h);
     };
-
-
+    glfwSetFramebufferSizeCallback(win->window, window_size_callback);
 
     return win;
 }
 
-int Graphics_Engine::Window::StartApplication()
+void Graphics_Engine::Window::StartApplication()
 {
+    Window::main = this;
+
+    lastTime = GetTime();
+
+    scene.Start();
     while (!glfwWindowShouldClose(window))
     {
         OnWindowInput();
 
+        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+
+        scene.Update();
+        scene.Render();
+
         glfwSwapBuffers(window);
         glfwPollEvents();
 
-        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
+        lastTime = GetTime();
     }
 
     glfwTerminate();
-
-    return 0;
 }
 
 Graphics_Engine::Window::~Window()
@@ -72,9 +83,31 @@ Graphics_Engine::Window::~Window()
     
 }
 
+ivec2 Graphics_Engine::Window::Resolution()
+{
+    return _resolution;
+}
+
+void Graphics_Engine::Window::Resolution(ivec2 res)
+{
+    _resolution = res;
+    scene.mainCam->ReloadNextFrame();
+    glViewport(0, 0, res.x, res.y);
+}
+
+float Graphics_Engine::Window::GetTime()
+{
+    return glfwGetTime();
+}
+
+float Graphics_Engine::Window::DeltaTime()
+{
+    return glfwGetTime() - lastTime;
+}
+
 void Graphics_Engine::Window::framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
-    glViewport(0, 0, width, height);
+    Resolution(ivec2(width, height));
 }
 
 void Graphics_Engine::Window::OnWindowInput()
