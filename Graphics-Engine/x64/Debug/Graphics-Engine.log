@@ -1,8 +1,0 @@
-﻿  Camera.cpp
-  MeshRenderer.cpp
-  Transform.cpp
-  Window.cpp
-C:\Development\CSC4900-Graphics-Engine\Graphics-Engine\Window.cpp(100,23): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
-C:\Development\CSC4900-Graphics-Engine\Graphics-Engine\Window.cpp(105,26): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
-  Generating Code...
-  Graphics-Engine.vcxproj -> C:\Development\CSC4900-Graphics-Engine\x64\Debug\Graphics-Engine.lib

@@ -396,3 +396,8 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+Graphics-Engine/x64/Debug/Graphics-Engine.log
+Graphics-Engine/x64/Debug/Graphics-Engine.tlog/CL.command.1.tlog
+Graphics-Engine/x64/Debug/Graphics-Engine.tlog/CL.read.1.tlog
+Graphics-Engine/x64/Debug/Graphics-Engine.tlog/CL.write.1.tlog
+x64/Debug/Graphics-Engine.pdb
