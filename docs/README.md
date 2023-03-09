@@ -9,4 +9,5 @@ Textbook:  Learn OpenGL by Joey de Vries
 
 # Website
 As a part of this project, I was tasked with creating a website for explaining my application. You can find this website on my GitHub.io site. 
-[Graphics Engine](https://quillo123.github.io/CSC4900-Graphics-Engine/)
+
+For more information, please visit the project site. The site has overview of the project, OpenGL, my experiences, and some of the fundamentals needed to understand the application. [Graphics Engine](https://quillo123.github.io/CSC4900-Graphics-Engine/)
