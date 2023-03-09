@@ -26,12 +26,15 @@ namespace Graphics_Engine {
 		mat4 GetProjectionMatrix();
 		mat4 GetViewMatrix();
 
-		void ReloadProjectionMatrix();
+		void ReloadNextFrame();
 
 	private:
 		mat4 _projectionMatrix;
 		CameraMode _mode;
-		
+
+		bool reloadProjectionMatrix = false;
+		void ReloadProjectionMatrix();
+
 	};
 }
 

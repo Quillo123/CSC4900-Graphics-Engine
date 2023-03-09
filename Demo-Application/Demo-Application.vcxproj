@@ -151,8 +151,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="HelloTriangle_FS.glsl" />
-    <None Include="HelloTriangle_VS.glsl" />
+    <None Include="SampleFragmentShader.fs.glsl" />
+    <None Include="SampleVertexShader.vs.glsl" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CameraController.h" />

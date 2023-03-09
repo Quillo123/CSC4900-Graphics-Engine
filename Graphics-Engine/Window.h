@@ -25,15 +25,16 @@ namespace Graphics_Engine {
 		static Window* CreateWindow();
 
 		//Starts the application loop
-		int StartApplication();
+		void StartApplication();
 
 		~Window();
 
 		ivec2 Resolution();
+		void Resolution(ivec2 res);
 
 
 		//Helpers 
-		float lastTime = 0;
+
 
 		float GetTime();
 		float DeltaTime();
@@ -43,6 +44,7 @@ namespace Graphics_Engine {
 		//Called whenever the window is resized	
 		void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 		void OnWindowInput();
+		float lastTime = 0;
 	};
 
 

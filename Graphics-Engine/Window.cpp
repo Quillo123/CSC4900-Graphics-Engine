@@ -42,15 +42,16 @@ Window* Window::CreateWindow()
 
     //Wraps the framebuffer_size_callback
     auto window_size_callback = [](GLFWwindow* window, int w, int h) {
-        Window* obj = static_cast<Window*>(glfwGetWindowUserPointer(window));
+        Window* obj = Window::main;
         assert(obj);
         obj->framebuffer_size_callback(window, w, h);
     };
+    glfwSetFramebufferSizeCallback(win->window, window_size_callback);
 
     return win;
 }
 
-int Graphics_Engine::Window::StartApplication()
+void Graphics_Engine::Window::StartApplication()
 {
     Window::main = this;
 
@@ -75,8 +76,6 @@ int Graphics_Engine::Window::StartApplication()
     }
 
     glfwTerminate();
-
-    return 0;
 }
 
 Graphics_Engine::Window::~Window()
@@ -87,6 +86,13 @@ Graphics_Engine::Window::~Window()
 ivec2 Graphics_Engine::Window::Resolution()
 {
     return _resolution;
+}
+
+void Graphics_Engine::Window::Resolution(ivec2 res)
+{
+    _resolution = res;
+    scene.mainCam->ReloadNextFrame();
+    glViewport(0, 0, res.x, res.y);
 }
 
 float Graphics_Engine::Window::GetTime()
@@ -101,10 +107,7 @@ float Graphics_Engine::Window::DeltaTime()
 
 void Graphics_Engine::Window::framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
-    _resolution.x = width;
-    _resolution.y = height;
-    scene.mainCam->ReloadProjectionMatrix();
-    glViewport(0, 0, width, height);
+    Resolution(ivec2(width, height));
 }
 
 void Graphics_Engine::Window::OnWindowInput()

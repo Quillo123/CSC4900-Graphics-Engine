@@ -12,9 +12,12 @@ using namespace std;
 int main()
 {
     Window* win = Window::CreateWindow();
+    assert(win);
 
-    Shader* SampleTriangleShader = Shader::CreateShader("HelloTriangle_VS.glsl", "HelloTriangle_FS.glsl");
-    
+    Shader* SampleMeshShader = Shader::CreateShader("SampleVertexShader.vs.glsl", "SampleFragmentShader.fs.glsl");
+    assert(SampleMeshShader);
+
+
     // Set the renderer color
     //vec4 color = vec4(1, 1, 1, 1);
     //SampleTriangleShader->Use();
@@ -25,7 +28,7 @@ int main()
     texture.LoadTexture("004_stone.png");
     
     // Create the mesh material
-    MeshMaterial* mat = new MeshMaterial(SampleTriangleShader, texture);
+    MeshMaterial* mat = new MeshMaterial(SampleMeshShader, texture);
     mat->Use();
     mat->SetVec4("ourColor", vec4(1, 1, 1, 1));
     
@@ -82,7 +85,7 @@ int main()
 
     win->StartApplication();
 
-    delete SampleTriangleShader;
+    delete SampleMeshShader;
     delete win;
     return 0;
 }

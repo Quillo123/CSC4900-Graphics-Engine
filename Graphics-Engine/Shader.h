@@ -9,7 +9,7 @@ namespace Graphics_Engine {
 
 	class Shader
 	{
-	public:
+	public:		
 		static Shader* CreateShader(std::string vertexShaderFilePath, std::string fragmentShaderFilePath);
 
 		void Use();

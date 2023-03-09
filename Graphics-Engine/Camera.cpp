@@ -19,7 +19,9 @@ void Graphics_Engine::Camera::Start()
 
 void Graphics_Engine::Camera::Update()
 {
-	
+	if (reloadProjectionMatrix) {
+		ReloadProjectionMatrix();
+	}
 }
 
 SceneObject* Graphics_Engine::Camera::Copy()
@@ -39,6 +41,11 @@ mat4 Graphics_Engine::Camera::GetProjectionMatrix()
 mat4 Graphics_Engine::Camera::GetViewMatrix()
 {
 	return inverse(transform.Model());
+}
+
+void Graphics_Engine::Camera::ReloadNextFrame()
+{
+	reloadProjectionMatrix = true;
 }
 
 void Graphics_Engine::Camera::ReloadProjectionMatrix()

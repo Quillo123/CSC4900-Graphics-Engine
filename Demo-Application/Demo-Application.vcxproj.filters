@@ -26,10 +26,10 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="HelloTriangle_FS.glsl">
+    <None Include="SampleFragmentShader.fs.glsl">
       <Filter>Shaders</Filter>
     </None>
-    <None Include="HelloTriangle_VS.glsl">
+    <None Include="SampleVertexShader.vs.glsl">
       <Filter>Shaders</Filter>
     </None>
   </ItemGroup>
