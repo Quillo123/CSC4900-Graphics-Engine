@@ -14,28 +14,28 @@ namespace Graphics_Engine {
 		Transform();
 		
 		// Position
-		vec3 GetPosition();
-		void SetPosition(vec3 position);
-		void SetPosition(float x, float y, float z);
+		vec3 Position();
+		void Position(vec3 position);
+		void Position(float x, float y, float z);
 
 
 		// Rotation
-		vec3 GetRotation();
-		void SetRotation(vec3 rotation);
-		void SetRotation(float x, float y, float z);
+		vec3 Rotation();
+		void Rotation(vec3 rotation);
+		void Rotation(float x, float y, float z);
 
 		void Rotate(float degrees, vec3 axis);
 
 		//Scale
-		vec3 GetScale();
-		void SetScale(vec3 scale);
-		void SetScale(float x, float y, float z);
+		vec3 Scale();
+		void Scale(vec3 scale);
+		void Scale(float x, float y, float z);
 
 
 		//Other
 		vec3 Forward();
-		vec3 Up();
-		vec3 Right();
+		//vec3 Up();
+		//vec3 Right();
 
 		mat4 Model();
 

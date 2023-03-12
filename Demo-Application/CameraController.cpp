@@ -5,8 +5,8 @@
 
 void CameraController::Start()
 {
-	transform.SetPosition(0, 0, -3);
-	transform.SetRotation(0, 0, 0);
+	transform.Position(0, 0, -3);
+	transform.Rotation(0, 0, 0);
 	camera = Window::main->scene.mainCam;
 }
 
@@ -39,16 +39,16 @@ void CameraController::Update()
 
 	if (Input::GetKeyPressed(KeyCode::C)) {
 		SceneObject* sceneObject = Window::main->scene.FindObject("HelloTriangle");
-		Window::main->scene.Instantiate(sceneObject, transform.GetPosition() + transform.GetRotation() * 2.0f);
+		Window::main->scene.Instantiate(sceneObject, transform.Position() + transform.Rotation() * 2.0f);
 	}
 
 	
 
-	transform.SetPosition(transform.GetPosition() + inputDir * speed * Window::main->DeltaTime());
+	transform.Position(transform.Position() + inputDir * speed * Window::main->DeltaTime());
 	//transform.SetRotation(0,sin(Window::main->GetTime()), 0);
 	
-	camera->transform.SetPosition(-transform.GetPosition());
-	camera->transform.SetRotation(-transform.GetRotation());
+	camera->transform.Position(-transform.Position());
+	camera->transform.Rotation(-transform.Rotation());
 
 	inputDir = vec3(0, 0, 0);
 }
@@ -56,8 +56,8 @@ void CameraController::Update()
 SceneObject* CameraController::Copy()
 {
 	CameraController* obj = new CameraController();
-	obj->transform.SetPosition(transform.GetPosition());
-	obj->transform.SetRotation(transform.GetRotation());
+	obj->transform.Position(transform.Position());
+	obj->transform.Rotation(transform.Rotation());
 
 	return dynamic_cast<SceneObject*>(obj);
 }

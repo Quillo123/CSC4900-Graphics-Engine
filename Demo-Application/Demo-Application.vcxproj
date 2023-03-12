@@ -144,6 +144,7 @@
   <ItemGroup>
     <ClCompile Include="CameraController.cpp" />
     <ClCompile Include="Demo-Application.cpp" />
+    <ClCompile Include="MeshMaterial.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Graphics-Engine\Graphics-Engine.vcxproj">
@@ -156,6 +157,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CameraController.h" />
+    <ClInclude Include="MeshMaterial.h" />
     <ClInclude Include="VoxelData.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -71,7 +71,7 @@ int main()
 
     auto cam = win->scene.Instantiate(dynamic_cast<SceneObject*>(new Camera()));
     win->scene.mainCam = dynamic_cast<Camera*>(cam);
-    win->scene.mainCam->transform.SetPosition(vec3(0, 0, -4));
+    win->scene.mainCam->transform.Position(vec3(0, 0, -4));
     cout << win->scene.mainCam->transform.ToString();
 
     auto camControl = win->scene.Instantiate(dynamic_cast<SceneObject*>(new CameraController()));

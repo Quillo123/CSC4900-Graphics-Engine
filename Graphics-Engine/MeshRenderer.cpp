@@ -61,9 +61,9 @@ SceneObject* Graphics_Engine::MeshRenderer::Copy()
 {
 	MeshRenderer* mr = new MeshRenderer(_material, _mesh);
 	mr->name = name;
-	mr->transform.SetPosition(transform.GetPosition());
-	mr->transform.SetRotation(transform.GetRotation());
-	mr->transform.SetScale(transform.GetScale());
+	mr->transform.Position(transform.Position());
+	mr->transform.Rotation(transform.Rotation());
+	mr->transform.Scale(transform.Scale());
 	return dynamic_cast<SceneObject*>(mr);
 }
 

@@ -27,8 +27,8 @@ void Graphics_Engine::Camera::Update()
 SceneObject* Graphics_Engine::Camera::Copy()
 {
 	Camera* obj = new Camera();
-	obj->transform.SetPosition(transform.GetPosition());
-	obj->transform.SetRotation(transform.GetRotation());
+	obj->transform.Position(transform.Position());
+	obj->transform.Rotation(transform.Rotation());
 
 	return dynamic_cast<SceneObject*>(obj);
 }

@@ -12,11 +12,11 @@ namespace Graphics_Engine {
 	public:
 
 
-		MeshRenderer(Material* shader);
+		MeshRenderer(Material* material);
 
-		MeshRenderer(Material* shader, Mesh* mesh);
+		MeshRenderer(Material* material, Mesh* mesh);
 
-		MeshRenderer(Material* shader, vec3 vertices[], int vertexCount, int triangles[], int triangleCount);
+		MeshRenderer(Material* material, vec3 vertices[], int vertexCount, int triangles[], int triangleCount);
 
 		~MeshRenderer();
 

@@ -10,36 +10,36 @@ Graphics_Engine::Transform::Transform()
     UpdateModel();
 }
 
-vec3 Graphics_Engine::Transform::GetPosition()
+vec3 Graphics_Engine::Transform::Position()
 {
     return _position;
 }
 
-void Graphics_Engine::Transform::SetPosition(vec3 position)
+void Graphics_Engine::Transform::Position(vec3 position)
 {
     _position = position;
     UpdateModel();
 }
 
-void Graphics_Engine::Transform::SetPosition(float x, float y, float z)
+void Graphics_Engine::Transform::Position(float x, float y, float z)
 {
-    SetPosition(vec3(x, y, z));
+    Position(vec3(x, y, z));
 }
 
-vec3 Graphics_Engine::Transform::GetRotation()
+vec3 Graphics_Engine::Transform::Rotation()
 {
     return _rotation;
 }
 
-void Graphics_Engine::Transform::SetRotation(vec3 rotation)
+void Graphics_Engine::Transform::Rotation(vec3 rotation)
 {
     _rotation = rotation;
     UpdateModel();
 }
 
-void Graphics_Engine::Transform::SetRotation(float x, float y, float z)
+void Graphics_Engine::Transform::Rotation(float x, float y, float z)
 {
-    SetRotation(vec3(x, y, z));
+    Rotation(vec3(x, y, z));
 }
 
 void Graphics_Engine::Transform::Rotate(float degrees, vec3 axis)
@@ -47,20 +47,20 @@ void Graphics_Engine::Transform::Rotate(float degrees, vec3 axis)
     _model = glm::rotate(_model, Window::main->GetTime() * glm::radians(degrees), axis);
 }
 
-vec3 Graphics_Engine::Transform::GetScale()
+vec3 Graphics_Engine::Transform::Scale()
 {
     return _scale;
 }
 
-void Graphics_Engine::Transform::SetScale(vec3 scale)
+void Graphics_Engine::Transform::Scale(vec3 scale)
 {
     _scale = scale;
     UpdateModel();
 }
 
-void Graphics_Engine::Transform::SetScale(float x, float y, float z)
+void Graphics_Engine::Transform::Scale(float x, float y, float z)
 {
-    SetScale(vec3(x, y, z));
+    Scale(vec3(x, y, z));
 }
 
 vec3 Graphics_Engine::Transform::Forward()

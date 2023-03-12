@@ -6,7 +6,7 @@
 
 using namespace Graphics_Engine;
 
-Window* Window::main;
+Window* Window::main = nullptr;
 
 Window* Window::CreateWindow()
 {

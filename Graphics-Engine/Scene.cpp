@@ -10,7 +10,7 @@ using namespace Graphics_Engine;
 SceneObject* Graphics_Engine::Scene::Instantiate(SceneObject* object, vec3 position, vec3 rotation, vec3 scale)
 {
     auto obj = Instantiate(object, position, rotation);
-    obj->transform.SetScale(scale);
+    obj->transform.Scale(scale);
     return obj;
 }    
 
@@ -18,14 +18,14 @@ SceneObject* Graphics_Engine::Scene::Instantiate(SceneObject* object, vec3 posit
 SceneObject* Graphics_Engine::Scene::Instantiate(SceneObject* object, vec3 position, vec3 rotation)
 {
     auto obj = Instantiate(object, position);
-    obj->transform.SetRotation(rotation);
+    obj->transform.Rotation(rotation);
     return obj;
 }
 
 SceneObject* Graphics_Engine::Scene::Instantiate(SceneObject* object, vec3 position)
 {
     auto obj = Instantiate(object);
-    obj->transform.SetPosition(position);
+    obj->transform.Position(position);
     return obj;
 }
 
