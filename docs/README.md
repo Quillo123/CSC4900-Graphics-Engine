@@ -1,7 +1,7 @@
 # CSC4900-Graphics-Engine
 Seattle Pacific University Independent Study Course Project - Graphics Engine Building
 
-# Independent Study Learning Plan
+# Seattle Pacific University Indpendent Study
 Noah Gallo – Winter 2023
 
 Textbook:  Learn OpenGL by Joey de Vries 
