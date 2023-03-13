@@ -13,6 +13,17 @@ Graphics_Engine::Mesh::Mesh(int verticesLength, vec3 vertices[], int trianglesLe
 	_uvs0 = nullptr;
 }
 
+Graphics_Engine::Mesh::Mesh(std::list<vec3> vertices, std::list<int> triangles)
+{
+	glGenVertexArrays(1, &_vertexArrayId);
+	glGenBuffers(1, &_vertexBufferId);
+	glGenBuffers(1, &_trianglesBufferId);
+
+	this->SetVertices(vertices);
+	this->SetTriangles(triangles);
+	_uvs0 = nullptr;
+}
+
 Graphics_Engine::Mesh::~Mesh()
 {
 	delete[] _vertices;
@@ -32,12 +43,30 @@ void Graphics_Engine::Mesh::SetVertices(int length, vec3 verts[])
 		return;
 	}
 
+	delete[] _vertices;
+
 	_verticesLength = length;
 	_vertices = new vec3[length];
 	for (int i = 0; i < length; i++) {
 		_vertices[i] = verts[i];
 	}
 
+	ReloadVertices();
+}
+
+void Graphics_Engine::Mesh::SetVertices(std::list<vec3> verts)
+{
+	delete[] _vertices;
+
+	_verticesLength = verts.size();
+	_vertices = new vec3[_verticesLength];
+	int i = 0;
+	while (verts.size() > 0)
+	{
+		_vertices[i] = verts.front();
+		verts.pop_front();
+		i++;
+	}
 	ReloadVertices();
 }
 
@@ -63,10 +92,32 @@ void Graphics_Engine::Mesh::SetTriangles(int length, int* triangles)
 		return;
 	}
 
+	delete[] this->_triangles;
+
 	_trianglesLength = length;
 	this->_triangles = new int[length];
 	for (int i = 0; i < length; i++) {
 		this->_triangles[i] = triangles[i];
+	}
+
+	Use();
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, _trianglesLength * sizeof(int), _triangles, _drawMode);
+	UnUse();
+}
+
+void Graphics_Engine::Mesh::SetTriangles(std::list<int> triangles)
+{
+	delete[] _triangles;
+
+	_trianglesLength = triangles.size();
+	_triangles = new int[_trianglesLength];
+	
+	int i = 0;
+	while (triangles.size() > 0)
+	{
+		_triangles[i] = triangles.front();
+		triangles.pop_front();
+		i++;
 	}
 
 	Use();
@@ -100,9 +151,30 @@ void Graphics_Engine::Mesh::SetUvs0(int length, vec2* uvs)
 		return;
 	}
 
+	delete[] _uvs0;
+
 	_uvs0 = new vec2[length];
 	for (int i = 0; i < length; i++) {
 		_uvs0[i] = uvs[i];
+	}
+	ReloadVertices();
+}
+
+void Graphics_Engine::Mesh::SetUvs0(std::list<vec2> uvs)
+{
+	if (uvs.size() != _verticesLength) {
+		std::cerr << "uvs length and vertices length must match" << std::endl;
+		return;
+	}
+
+	delete[] _uvs0;
+	_uvs0 = new vec2[uvs.size()];
+	int i = 0;
+	while (uvs.size() > 0)
+	{
+		_uvs0[i] = uvs.front();
+		uvs.pop_front();
+		i++;
 	}
 	ReloadVertices();
 }

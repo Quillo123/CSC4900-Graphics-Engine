@@ -67,4 +67,21 @@ SceneObject* Graphics_Engine::MeshRenderer::Copy()
 	return dynamic_cast<SceneObject*>(mr);
 }
 
+void Graphics_Engine::MeshRenderer::SetMaterial(Material* material)
+{
+	_material = material;
+}
+
+void Graphics_Engine::MeshRenderer::SetMesh(Mesh* mesh)
+{
+	_mesh = mesh;
+}
+
+Mesh* Graphics_Engine::MeshRenderer::GetSharedMesh()
+{
+	return _mesh;
+}
+
+
+
 

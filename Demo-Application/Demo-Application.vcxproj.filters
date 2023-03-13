@@ -27,6 +27,12 @@
     <ClCompile Include="MeshMaterial.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Chunk.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="VoxelData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="SampleFragmentShader.fs.glsl">
@@ -44,6 +50,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MeshMaterial.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Chunk.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

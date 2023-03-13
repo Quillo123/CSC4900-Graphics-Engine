@@ -1,6 +1,7 @@
 #pragma once
 #include <glm/glm.hpp>
 #include <glad/glad.h>
+#include <list>
 
 using namespace glm;
 
@@ -18,17 +19,21 @@ namespace Graphics_Engine {
 
 
 		Mesh(int verticesLength, vec3 vertices[], int trianglesLength, int triangles[]);
+		Mesh(std::list<vec3> vertices, std::list<int> triangles);
 		~Mesh();
 
 		void SetVertices(int length, vec3 verts[]);
+		void SetVertices(std::list<vec3> verts);
 		vec3 GetVertex(int index);
 		int GetVerticesLength();
 
 		void SetTriangles(int length, int* triangles);
+		void SetTriangles(std::list<int> triangles);
 		int GetTrianglesIndex(int index);
 		int GetTrianglesLength();
 
 		void SetUvs0(int length, vec2* uvs);
+		void SetUvs0(std::list<vec2> uvs);
 		vec2 GetUvs0Index(int index);
 
 		void SetVertextBufferMode(GLenum drawMode);

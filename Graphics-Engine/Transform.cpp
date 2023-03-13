@@ -68,6 +68,16 @@ vec3 Graphics_Engine::Transform::Forward()
     return glm::normalize((vec3(inverse(_model)[2])));
 }
 
+vec3 Graphics_Engine::Transform::Up()
+{
+    return glm::normalize((vec3(inverse(_model)[1])));
+}
+
+vec3 Graphics_Engine::Transform::Right()
+{
+    return glm::normalize((vec3(inverse(_model)[0])));
+}
+
 mat4 Graphics_Engine::Transform::Model()
 {
     return _model;
@@ -89,9 +99,8 @@ void Graphics_Engine::Transform::UpdateModel()
 
     _model = glm::translate(_model, _position);
 
-
-    _model = glm::rotate(_model, _rotation.z, vec3(0, 0, 1));
     _model = glm::rotate(_model, _rotation.y, vec3(0, 1, 0));
+    _model = glm::rotate(_model, _rotation.z, vec3(0, 0, 1));
     _model = glm::rotate(_model, _rotation.x, vec3(1, 0, 0));
 
     _model = glm::scale(_model, _scale);

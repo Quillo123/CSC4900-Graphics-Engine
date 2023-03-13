@@ -1,56 +1,95 @@
 #include "CameraController.h"
 #include <Window.h>
 #include <Input.h>
+#include <iostream>
 
 
 void CameraController::Start()
 {
 	transform.Position(0, 0, -3);
 	transform.Rotation(0, 0, 0);
-	camera = Window::main->scene.mainCam;
+	ReloadProjectionMatrix();
 }
 
 void CameraController::Update()
 {
-	// Change Position
-	if (Input::GetKeyPressed(KeyCode::W)) {
-		inputDir += vec3(0, 0, 1) * transform.Forward();
-	}
-	if (Input::GetKeyPressed(KeyCode::S)) {
-		inputDir += vec3(0, 0, -1) * transform.Forward();
-	}
-	if (Input::GetKeyPressed(KeyCode::A)) {
-		inputDir += vec3(1, 0, 0);
-	}
-	if (Input::GetKeyPressed(KeyCode::D)) {
-		inputDir += vec3(-1, 0, 0);
-	}
-	if (Input::GetKeyPressed(KeyCode::E)) {
-		inputDir += vec3(0, -1, 0);
-	}
-	if (Input::GetKeyPressed(KeyCode::Q)) {
-		inputDir += vec3(0, 1, 0);
-	}
+
 
 	// Change Rotation
 	if (Input::GetKeyPressed(KeyCode::UP)) {
-		camera->transform.Rotate(rotationSpeed, vec3(0, 0, 1));
+		Pitch += rotationSpeed * Window::main->DeltaTime();
+		if (Pitch > 89) Pitch = 89;
+		if (Pitch < -89) Pitch = -89;
+	}
+	if (Input::GetKeyPressed(KeyCode::DOWN)) {
+		Pitch -= rotationSpeed * Window::main->DeltaTime();
+		if (Pitch > 89) Pitch = 89;
+		if (Pitch < -89) Pitch = -89;
+	}
+	if (Input::GetKeyPressed(KeyCode::LEFT)) {
+		Yaw -= rotationSpeed * Window::main->DeltaTime();
+	}
+	if (Input::GetKeyPressed(KeyCode::RIGHT)) {
+		Yaw += rotationSpeed * Window::main->DeltaTime();
 	}
 
+
+	vec3 front;
+	front.x = cos(glm::radians(Yaw)) * cos(glm::radians(Pitch));
+	front.y = sin(glm::radians(Pitch));
+	front.z = sin(glm::radians(Yaw)) * cos(glm::radians(Pitch));
+	Front = glm::normalize(front);
+	//// also re-calculate the Right and Up vector
+	Right = glm::normalize(glm::cross(Front, WorldUp));  // normalize the vectors, because their length gets closer to 0 the more you look up or down which results in slower movement.
+	Up = glm::normalize(glm::cross(Right, Front));
+
+
+
+	transform.Rotation(normalize(front));
+
+
+	// Change Position
+	if (Input::GetKeyPressed(KeyCode::W)) {
+		inputDir += Front;
+	}
+	if (Input::GetKeyPressed(KeyCode::S)) {
+		inputDir -= Front;
+	}
+	if (Input::GetKeyPressed(KeyCode::A)) {
+		inputDir -= Right;
+	}
+	if (Input::GetKeyPressed(KeyCode::D)) {
+		inputDir += Right;
+	}
+	if (Input::GetKeyPressed(KeyCode::E)) {
+		inputDir += WorldUp;
+	}
+	if (Input::GetKeyPressed(KeyCode::Q)) {
+		inputDir -= WorldUp;
+	}
+
+	transform.Position(transform.Position() + inputDir * speed * Window::main->DeltaTime());
+
 	if (Input::GetKeyPressed(KeyCode::C)) {
-		SceneObject* sceneObject = Window::main->scene.FindObject("HelloTriangle");
+		SceneObject* sceneObject = Window::main->scene.FindObject("chunk");
 		Window::main->scene.Instantiate(sceneObject, transform.Position() + transform.Rotation() * 2.0f);
 	}
 
+	//vec3 dir;
+	//dir.x = cos(yaw) * cos(pitch);
+	//dir.y = sin(pitch);
+	//dir.z = sin(yaw) * cos(pitch);
 	
-
-	transform.Position(transform.Position() + inputDir * speed * Window::main->DeltaTime());
 	//transform.SetRotation(0,sin(Window::main->GetTime()), 0);
 	
-	camera->transform.Position(-transform.Position());
-	camera->transform.Rotation(-transform.Rotation());
+	
+	//camera->transform.Rotation(transform.Rotation());
 
 	inputDir = vec3(0, 0, 0);
+
+	if (reloadProjectionMatrix) {
+		ReloadProjectionMatrix();
+	}
 }
 
 SceneObject* CameraController::Copy()

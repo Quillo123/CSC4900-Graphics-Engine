@@ -14,8 +14,20 @@ namespace Graphics_Engine {
 			PERSPECTIVE
 		};
 
+		vec3 Front;
+		vec3 Up;
+		vec3 Right;
+		vec3 WorldUp = vec3(0,1,0);
+		// euler Angles
+		float Yaw;
+		float Pitch;
+		// camera options
+		float MovementSpeed;
+		float MouseSensitivity;
+		float Zoom;
 
 		Camera();
+
 
 		void Start() override;
 
@@ -27,8 +39,7 @@ namespace Graphics_Engine {
 		mat4 GetViewMatrix();
 
 		void ReloadNextFrame();
-
-	private:
+	protected:
 		mat4 _projectionMatrix;
 		CameraMode _mode;
 

@@ -34,8 +34,8 @@ namespace Graphics_Engine {
 
 		//Other
 		vec3 Forward();
-		//vec3 Up();
-		//vec3 Right();
+		vec3 Up();
+		vec3 Right();
 
 		mat4 Model();
 
