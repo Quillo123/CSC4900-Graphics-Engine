@@ -30,10 +30,12 @@ int main()
     Chunk* chunk = new Chunk(mat);
     chunk->name = "chunk";
 
+    srand(time(NULL));
+
     for (int x = 0; x < Chunk::width; x++) {
         for (int y = 0; y < Chunk::height; y++) {
             for (int z = 0; z < Chunk::length; z++) {
-                chunk->SetBlock(x, y, z, Block(y % 2 == 0 && x % 2 == 0, 4, ivec3(x, y, z)));
+                chunk->SetBlock(x, y, z, Block(rand() % 2, rand() % 5 + 3, ivec3(x, y, z)));
             }
         }
     }
@@ -44,6 +46,8 @@ int main()
 
     auto camControl = win->scene.Instantiate(dynamic_cast<SceneObject*>(new CameraController()));
     win->scene.mainCam = dynamic_cast<Camera*>(camControl);
+    win->scene.mainCam->transform.Position(vec3(-10, 10, 10));
+
 
     cout << win->scene.mainCam->transform.ToString() << endl;
     

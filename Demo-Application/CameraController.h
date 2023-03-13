@@ -7,7 +7,7 @@ using namespace Graphics_Engine;
 class CameraController : public Camera
 {
 public:
-	float speed = 200;
+	float speed = 500;
 	float rotationSpeed = 10000;
 	vec3 inputDir = vec3(0, 0, 0);
 

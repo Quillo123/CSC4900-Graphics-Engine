@@ -6,8 +6,6 @@
 
 void CameraController::Start()
 {
-	transform.Position(0, 0, -3);
-	transform.Rotation(0, 0, 0);
 	ReloadProjectionMatrix();
 }
 
@@ -74,16 +72,6 @@ void CameraController::Update()
 		SceneObject* sceneObject = Window::main->scene.FindObject("chunk");
 		Window::main->scene.Instantiate(sceneObject, transform.Position() + transform.Rotation() * 2.0f);
 	}
-
-	//vec3 dir;
-	//dir.x = cos(yaw) * cos(pitch);
-	//dir.y = sin(pitch);
-	//dir.z = sin(yaw) * cos(pitch);
-	
-	//transform.SetRotation(0,sin(Window::main->GetTime()), 0);
-	
-	
-	//camera->transform.Rotation(transform.Rotation());
 
 	inputDir = vec3(0, 0, 0);
 
