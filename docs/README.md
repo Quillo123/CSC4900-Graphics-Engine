@@ -12,7 +12,7 @@ As a part of this project, I was tasked with creating a website for explaining m
 
 For more information, please visit the project site. The site has overview of the project, OpenGL, my experiences, and some of the fundamentals needed to understand the application. [Graphics Engine](https://quillo123.github.io/CSC4900-Graphics-Engine/)
 
-## CSC4900 Wiki
+# CSC4900 Wiki
 
 This repository is part of an independent study course at Seattle Pacific University, in partnership with Dr. Carlos Arias. 
 
