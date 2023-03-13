@@ -2,8 +2,8 @@
 Seattle Pacific University Independent Study Course Project - Graphics Engine Building
 
 # Seattle Pacific University Indpendent Study
-Author: Noah Gallo
-Advisor: Dr. Carlos Arias Arevalo 
+Author: Noah Gallo <br>
+Advisor: Dr. Carlos Arias Arevalo <br>
 Winter 2023
 
 Textbook:  Learn OpenGL by Joey de Vries 
