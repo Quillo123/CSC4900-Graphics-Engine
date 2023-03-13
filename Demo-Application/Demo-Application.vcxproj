@@ -163,6 +163,10 @@
     <ClInclude Include="MeshMaterial.h" />
     <ClInclude Include="VoxelData.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="004_stone.png" />
+    <Image Include="MapTextureAtlas.png" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

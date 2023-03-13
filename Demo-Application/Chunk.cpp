@@ -52,16 +52,18 @@ void Chunk::ReloadMesh()
 					auto pos = vec3(x, y, z);
 					if (!CheckVoxel(ivec3(x, y, z) + VoxelData::faceChecks[i]))
 					{
-						//Vector2 UVOffsett = BlockManager.Main.GetBlockUVOffset(blockID, i);
+						float texSize = 1.0f / 8.0f;
+						int texId = 64 - GetBlock(x, y, z).textureID;
+						vec2 UVOffsett = vec2(texId % 8, texId / 8) * texSize;
 
 						vertices.push_back(pos + VoxelData::Vertices[VoxelData::Triangles[i][0]]);
 						vertices.push_back(pos + VoxelData::Vertices[VoxelData::Triangles[i][1]]);
 						vertices.push_back(pos + VoxelData::Vertices[VoxelData::Triangles[i][2]]);
 						vertices.push_back(pos + VoxelData::Vertices[VoxelData::Triangles[i][3]]);
-						uvs.push_back((VoxelData::uvs[0]));
-						uvs.push_back((VoxelData::uvs[1]));
-						uvs.push_back((VoxelData::uvs[2]));
-						uvs.push_back((VoxelData::uvs[3]));
+						uvs.push_back((VoxelData::uvs[0] * texSize) + UVOffsett);
+						uvs.push_back((VoxelData::uvs[1] * texSize) + UVOffsett);
+						uvs.push_back((VoxelData::uvs[2] * texSize) + UVOffsett);
+						uvs.push_back((VoxelData::uvs[3] * texSize) + UVOffsett);
 						triangles.push_back(index);
 						triangles.push_back(index + 1);
 						triangles.push_back(index + 2);
